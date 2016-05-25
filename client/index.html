@@ -1,0 +1,24 @@
+<html>  
+    <head> 
+        <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+        <script src="MainController.js"></script>
+    </head>
+    <body ng-app="MyApp">
+         <h1>
+             <table ng-controller="MainController">
+                 <thead>
+                     <tr>
+                        <th>Username</th>
+                        <th>Password</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr ng-repeat="user in users">
+                         <td>{{user.username}}</td>
+                         <td>{{user.password}}</td>
+                     </tr>
+                 </tbody>
+             </table>
+         </h1>
+    </body>
+</html>
