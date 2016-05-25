@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get("/",function (req,res) {
-  res.sendfile(__dirname + '/client/login.html');
+  res.sendfile(__dirname + '/client/index.html');
 }).get("/login.html",function (req,res) {
   res.sendfile(__dirname + '/client/login.html');});
 

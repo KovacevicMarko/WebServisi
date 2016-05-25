@@ -1,33 +1,17 @@
 
 <html>  
     <head> 
-        <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+        <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.min.js"></script>
         <script src="LoginController.js"></script>
-        <link rel="stylesheet" href="bootstrap.css" type="text/css" media="screen" charset="utf-8" />
     </head>
     <body ng-app="MyApp">
         
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Molimo vas, prijavite se </strong></h3>
-                </div>
-                
-                <div class="panel-body">
-                    <form ng-submit="submit()" ng-controller="LoginController">
-                        <div class="form-group">
-                            <label for="username">Korisničko ime</label>
-                            <input type="text" ng-model="username" class="form-control" id="username" placeholder="Ukucajte korisničko ime">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Lozinka</label>
-                            <input type="password" ng-model="password" class="form-control" id="password" placeholder="Ukucajte lozinku">
-                        </div>
-                        <p align="center"><button type="submit" class="btn btn-sm btn-default">Prijavi se</button></p>
-                    </form>
-                </div>
-            </div>
-	    </div>
-
+        <form ng-submit="submit()" ng-controller="LoginController">
+            {{ username }}
+            {{ password }}
+            <input type="text" ng-model="username">
+            <input type="password" ng-model="password">
+            <input type="submit" value="Posalji">
+        </form>
     </body>
 </html>

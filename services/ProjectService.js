@@ -9,4 +9,3 @@ var Project = require(__dirname+'/../model/Project'); // get the mongoose model
 
 var ProjectRouter = express.Router();
 
-ProjectRouter.

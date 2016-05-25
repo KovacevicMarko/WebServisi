@@ -24,7 +24,7 @@ UserRouter
       res.json(data);
     });
   })
-  .post('/user/', function(req, res, next) {
+  .post('/user/signUp', function(req, res, next) {
     var user = new User(req.body);
     console.log('JSON:' + req.body);
     user.save(function(err, data) {
@@ -34,6 +34,27 @@ UserRouter
 
     });
   })
+   .post('/user/signIn', function(req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    User.findOne({
+      "username": username,
+      "password" : password
+    }).exec(function(err, user) {
+      // ako se desila greska predjemo na sledeci middleware (za rukovanje greskama)
+      if (err) next(err);
+      if(user==null)
+      {
+        res.send('Wrong username or password!'); 
+        next();
+      }
+      else{
+        res.json(user);
+      }
+    });
+  })
+ 
   .delete('/user/:username', function(req, res, next) {
     User.remove({
       "_username": req.params.id

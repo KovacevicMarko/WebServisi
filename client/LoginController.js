@@ -4,16 +4,23 @@
     var LoginController = function($scope, $http, $location,$window) {
         $scope.submit = function () {
             //alert($scope.username + "\n" + $scope.password);
-            $http.get("UserService/user/"+$scope.username).then(function(response) {
+            
+            var req = {
+                method : "POST",
+                url: "/UserService/user/signIn",
+                headers: {
+                'Content-Type': "application/json"
+                },
+                data: {"username" : $scope.username, "password" : $scope.password}
+            }
+            
+            $http(req).then(function(response) {
                 //$scope.user = response.data;
-                if (response.data) {
-                    if ($scope.password == response.data.password && $scope.username == response.data.username)
+                if (response.data.username) {
                         $window.location.href = "index.html";
-                else
-                    alert("Neuspesno logovanje");
                 }
                 else
-                    alert("Neuspesno logovanje");
+                    alert(response.data);
             });
             
         }
