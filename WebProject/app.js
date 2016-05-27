@@ -3,8 +3,15 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+var cookieParser = require('cookie-parser');
+var expressSession=require('express-session');
+
 mongoose.connect('mongodb://localhost:27017/webBaza');
 var port = process.env.PORT || 8080; // na kom portu slusa server
+
+//middleware za sesiju
+app.use(cookieParser());
+app.use(expressSession({ secret: 'keyboard_jdshfissd_cat', cookie: { maxAge: 1800000 }, resave: true, saveUninitialized: true }));
 
 //middleware za citanje zahteva
 app.use(bodyParser.urlencoded({
@@ -12,16 +19,20 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+//Klijentska aplikacija
+app.use('/', express.static(__dirname+'/client'));
+
 app.get("/",function (req,res) {
   res.sendfile(__dirname + '/client/index.html');
 }).get("/login.html",function (req,res) {
   res.sendfile(__dirname + '/client/login.html');});
 
-//Middleware za rukovanje sa Userom
-var user = require('./services/UserService')
-app.use('/UserService/',user);
+//Servisi
+var userService = require('./services/UserService');
+app.use('/UserService/',userService);
 
-app.use('/', express.static(__dirname+'/client'));
+var authService = require('./services/AuthService');
+app.use('/AuthService',authService);
 
 //na kraju dodajemo middleware za obradu gresaka
 app.use(function(err, req, res, next) {
