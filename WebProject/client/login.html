@@ -1,12 +1,15 @@
 
 <html>  
     <head> 
-        <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.min.js"></script>
-        <script src="LoginController.js"></script>
+        <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+        <script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>
+        <script src="/auth/SignInController.js"></script>
+        <script src="/auth/AuthService.js"></script>
+        
     </head>
     <body ng-app="MyApp">
         
-        <form ng-submit="submit()" ng-controller="LoginController">
+        <form ng-submit="signin()" ng-controller="SignInController">
             {{ username }}
             {{ password }}
             <input type="text" ng-model="username">

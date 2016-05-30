@@ -44,7 +44,7 @@ AuthRouter
         next();
       }
       else{
-        res.session.user = user;
+        req.session.user = user;
         res.send({success: true, msg:'Successfully signed in!'});
       }
     });
