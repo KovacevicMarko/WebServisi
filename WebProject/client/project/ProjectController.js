@@ -14,6 +14,8 @@
         
         
        ProjectService.getProjects(onSuccess,onError);
+       
+       
     }
   
     app.controller("ProjectController", ProjectController);
