@@ -15,15 +15,26 @@ ProjectRouter
       res.json(data);
     });
   })
-  .post('/addproject', function(req, res, next) {
+  .post('/addProject', function(req, res, next) {
     var project = new Project(req.body);
+    project.creator = req.session.user._id;
     console.log('JSON:' + req.body);
     project.save(function(err, data) {
       if (err) next(err);
       
-      res.json(data);
+      res.json({success:true,data:data});
 
     });
-  });
+  })
+  .delete('/project/:id', function(req, res, next) {
+      Project.remove({
+        "_id": req.params.id
+        }, function(err, successIndicator) {
+      if (err) next(err);
+        res.json(successIndicator);
+      });
+    });
+  
+  
   
 module.exports = ProjectRouter;
