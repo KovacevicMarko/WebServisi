@@ -34,6 +34,9 @@ app.use('/UserService/',userService);
 var authService = require('./services/AuthService');
 app.use('/AuthService',authService);
 
+var projectService = require('./services/ProjectService');
+app.use('/ProjectService',projectService);
+
 //na kraju dodajemo middleware za obradu gresaka
 app.use(function(err, req, res, next) {
   var message = err.message;

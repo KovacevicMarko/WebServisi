@@ -9,3 +9,21 @@ var Project = require(__dirname+'/../model/Project'); // get the mongoose model
 
 var ProjectRouter = express.Router();
 
+ProjectRouter
+  .get('/projects/', function(req, res) {
+    Project.find({}, function(err, data, next) {
+      res.json(data);
+    });
+  })
+  .post('/addproject', function(req, res, next) {
+    var project = new Project(req.body);
+    console.log('JSON:' + req.body);
+    project.save(function(err, data) {
+      if (err) next(err);
+      
+      res.json(data);
+
+    });
+  });
+  
+module.exports = ProjectRouter;

@@ -1,10 +1,23 @@
 <html>  
     <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <meta HTTP-EQUIV="Expires" CONTENT="-1">
+        <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+        <script data-require="angular-resource@*" data-semver="1.4.8" src="https://code.angularjs.org/1.4.8/angular-resource.js"></script>
+         <script data-require="angular-route@*" data-semver="1.4.8" src="https://code.angularjs.org/1.4.8/angular-route.js"></script>
+          <script data-require="angular-ui-router@*" data-semver="0.2.15" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+        <!--<script src="MainController.js"></script>-->
+        <script src="project/ProjectController.js"></script>
+        <script src="project/ProjectService.js"></script>
         
+        <link rel="stylesheet" href="bootstrap.css" type="text/css"
+	        media="screen" />
+        <link rel="stylesheet" href="bootstrap-theme.css" type="text/css"
+            media="screen" />
     </head>
-    <body>
-         <h1>
-             Stigao Pera Dono Net!
-         </h1>
+    <body ng-app="MyApp">
+        <!--<div ng-include="'headerL.html'"></div>-->
+        <div ui-view="getProjects"></div>
     </body>
 </html>

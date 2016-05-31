@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('wsapp')
-    .controller('SignoutController', function ($scope, authService, $location, $state) {
+angular.module('MyApp')
+    .controller('SignOutController', function ($scope, AuthService, $location, $state) {
 
 		//button clicked
 	    $scope.signout = function(){
 
-		   authService.signout(
+		   AuthService.signout(
 			   function(response){
 				   console.log(response.data.msg);
 				   	$state.go('home');
