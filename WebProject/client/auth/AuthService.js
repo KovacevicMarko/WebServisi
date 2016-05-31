@@ -52,7 +52,7 @@ angular.module('MyApp')
         authenticate: function(onSuccess, onError){
         
         var req = {
-		    method: 'POST',
+		    method: 'GET',
 		    url: '/AuthService/auth'
 		}	
 

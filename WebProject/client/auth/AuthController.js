@@ -3,15 +3,16 @@
 	
 	app.controller(
          
-    'SignInController',function($scope, $state, AuthService) {
+    'AuthController',function($scope, $state, AuthService) {
         
 		var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
 				alertify.success("WELCOME!");
-				$state.go('main');
+				$scope.user = response.data.user;
 			}else{
 				alertify.error("ERROR");
+                $state.go('login');
 			}
 
 		};
@@ -21,13 +22,12 @@
 			alertify.error("ERROR");
 		}
 			   
-        $scope.signin = function(){
+        $scope.authenticate = function(){
 
-		   AuthService.signin(
-			   $scope.username, 
-			   $scope.password, 
+		   AuthService.authenticate(
 			   onSuccess
 			   ,onError);
   		};
+          $scope.authenticate();
     });
 }());

@@ -9,7 +9,7 @@ angular.module('MyApp')
 		   AuthService.signout(
 			   function(response){
 				   console.log(response.data.msg);
-				   	$state.go('home');
+				   	$state.go('login');
 			   }
 			   ,function(response){
 					console.log(response.data.msg);

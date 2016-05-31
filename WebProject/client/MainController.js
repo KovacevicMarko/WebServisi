@@ -1,7 +1,7 @@
 (function() {
-    var app = angular.module("MyApp",[]);
+    var app = angular.module("MyApp",["ui.router"]);
          
-    var MainController = function($scope, $http, $location,$window) {
+    var MainController = function($scope, $http, AuthService, $location,$window) {
         $http.get("UserService/user/").then(function(response) {
             //$scope.user = response.data;
             $scope.users = response.data;
@@ -11,4 +11,6 @@
     }
 
     app.controller("MainController",MainController);
+    
+    
 }());

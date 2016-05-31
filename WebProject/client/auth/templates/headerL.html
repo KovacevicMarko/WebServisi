@@ -8,9 +8,9 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><p class="navbar-text" style="color: white;">
-					Dobrodošli, <span style="color: yellow;"> {{ 4+5 }}</span>
+					Dobrodošli, <span style="color: yellow;"> {{ user.username }}</span>
 				</p></li>
-			<li><a href="LogoutController">Odjavi se</a></li>
+			<li><a ng-click="signout()" ng-controller="SignOutController">Odjavi se</a></li>
 		</ul>
 	</div>
 </nav>

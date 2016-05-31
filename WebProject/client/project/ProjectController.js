@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module("MyApp", ['ui.router']);
+    var app = angular.module("MyApp");
     
     var ProjectController = function ($scope, ProjectService, $http) {
         
@@ -18,18 +18,18 @@
   
     app.controller("ProjectController", ProjectController);
     
-    app.config(function ($stateProvider,$urlRouterProvider) {
+    /*app.config(function ($stateProvider,$urlRouterProvider) {
     $urlRouterProvider.otherwise('/main');
-    $stateProvider
-    .state('main', {//naziv stanja!
+    $stateProvider.state('main', 
+    {//naziv stanja!
       url: '/main',
       views: {
-        getProjects:{
-          templateUrl: 'project/projects.html',
-          controller: 'ProjectController'
+          getProjects:{
+              templateUrl: 'project/projects.html',
+              controller: 'ProjectController'
         },
         
       }
     });
-  });
+  });*/
 }());

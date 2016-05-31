@@ -10,12 +10,12 @@ var AuthRouter = express.Router(); // koristimo express Router
 
 // definisanje ruta za usera
 AuthRouter
-  .post('/auth', function(req, res) {
+  .get('/auth', function(req, res) {
 
       if(!req.session.user){
       	res.send({success: false});
       }else{
-      	res.send({success: true});
+      	res.send({success: true,user: req.session.user});
       }
   })   
   .post('/signUp', function(req, res, next) {
@@ -24,7 +24,8 @@ AuthRouter
     user.save(function(err, data) {
       if (err) next(err);
       
-      res.json(data);
+      req.session.user = data;
+      res.json({success: true,user: data});
 
     });
   })
@@ -45,7 +46,7 @@ AuthRouter
       }
       else{
         req.session.user = user;
-        res.send({success: true, msg:'Successfully signed in!'});
+        res.send({success: true, user:user});
       }
     });
   })
