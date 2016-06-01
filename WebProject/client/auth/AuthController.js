@@ -28,6 +28,7 @@
 			   onSuccess
 			   ,onError);
   		};
-          $scope.authenticate();
+         
+		 return $scope.authenticate();
     });
 }());

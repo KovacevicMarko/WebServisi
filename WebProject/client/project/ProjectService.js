@@ -15,5 +15,15 @@ angular.module('MyApp')
 		
 		},
 		
+        addProject: function (onSuccess,onError,data) {
+            
+            var req = {
+                method : 'POST',
+                url: '/ProjectService/addProject',
+                data : data
+            }
+            
+         $http(req).then(onSuccess, onError);
+        }
 	}
 });
