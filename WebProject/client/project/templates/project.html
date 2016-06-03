@@ -1,0 +1,6 @@
+<div data-ng-init="getProject()">
+<h1>{{project.title}}</h1>
+<select ng-model="users" multiple="multiple">
+    <option ng-repeat="user in allUsers" value="{{user.username}}" ng-selected="userOnProject({{user.username}})"></option>
+</select>
+</div>

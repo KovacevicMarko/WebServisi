@@ -24,6 +24,19 @@ angular.module('MyApp')
             }
             
          $http(req).then(onSuccess, onError);
-        }
+        },
+        getProject: function(id,onSuccess, onError){
+		
+		var req = {
+                method : "GET",
+                url: "/ProjectService/projects/"+id,
+                headers: {
+                     'Content-Type': "application/json"
+                         }
+            }	
+
+		$http(req).then(onSuccess, onError);
+		
+		}
 	}
 });

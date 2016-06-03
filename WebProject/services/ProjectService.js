@@ -15,6 +15,13 @@ ProjectRouter
       res.json(data);
     });
   })
+  .get('/projects/:id', function(req, res) {
+    Project.findOne({
+      "_id" : req.params.id
+    }, function(err, data, next) {
+      res.json({success:true,data:data});
+    });
+  })
   .post('/addProject', function(req, res, next) {
     var project = new Project(req.body);
     project.creator = req.session.user._id;
