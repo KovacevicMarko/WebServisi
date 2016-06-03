@@ -13,7 +13,7 @@
             },
             content: {
               templateUrl: 'project/projects.html',
-              controller: 'ProjectController'
+              controller: 'ProjectsController'
             }
         }
         })
@@ -27,6 +27,19 @@
             content: {
               templateUrl: 'auth/templates/signUp.html',
               controller: 'SignUpController'
+            }
+        }            
+        })
+        .state('project',{//naziv stanja!
+        url: '/projects/:id',
+        views: {
+            header:{
+                templateUrl: 'auth/templates/headerL.html',
+                controller: 'AuthController'
+            },
+            content: {
+              templateUrl: 'project/templates/project.html',
+              controller: 'ProjectController'
             }
         }            
         });

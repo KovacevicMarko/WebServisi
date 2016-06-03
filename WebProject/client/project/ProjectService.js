@@ -25,8 +25,20 @@ angular.module('MyApp')
             
          $http(req).then(onSuccess, onError);
         },
-        
-        addUsersOnProject: function (onSuccess,onError,projectId,data) {
+        getProject: function(id,onSuccess, onError){
+		
+		var req = {
+                method : "GET",
+                url: "/ProjectService/projects/"+id,
+                headers: {
+                     'Content-Type': "application/json"
+                         }
+            }	
+
+		$http(req).then(onSuccess, onError);
+		
+		}
+		addUsersOnProject: function (onSuccess,onError,projectId,data) {
             var req = {
                 method = "POST",
                 url : '/ProjectService/usersOnProject/:'+projectId,
@@ -35,5 +47,8 @@ angular.module('MyApp')
             
            $http(req).then(onSuccess,onError);
         }
+		
+			
+
 	}
 });
