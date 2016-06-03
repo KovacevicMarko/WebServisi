@@ -26,6 +26,15 @@ ProjectRouter
 
     });
   })
+  .post('/usersOnProject/:id', function(req, res, next){
+    Project.findOne({"_id" : req.params.id}
+    ).exec(function(err,project){
+      if(err) next(err);
+      
+      project.usersOnProject = req.body;
+      res.json(project);
+    })
+  })
   .delete('/project/:id', function(req, res, next) {
       Project.remove({
         "_id": req.params.id
