@@ -9,6 +9,25 @@ var expressSession=require('express-session');
 mongoose.connect('mongodb://localhost:27017/webBaza');
 var port = process.env.PORT || 8080; // na kom portu slusa server
 
+// ENUMERACIJE
+// STATUSI
+STATUS = {
+  TODO : {value: 0, name: "To Do"},
+  INPROGRESS : {value : 1, name: "In Progress"},
+  VERIFY : {value : 2, name : "Verify"},
+  DONE : {value : 3, name : "Done"}
+}
+
+// PRIORITETI
+PRIORITY = {
+  TRIVIAL : {value: 0, name: "Trivial"},
+  MINOR: {value: 1, name: "Minor"},
+  MAJOR: {value: 2, name: "Major"},
+  CRITICAL: {value: 3, name: "Critical"},
+  BLOCKER: {value: 4, name: "Blocker"},
+}
+//-------------------------
+
 //middleware za sesiju
 app.use(cookieParser());
 app.use(expressSession({ secret: 'keyboard_jdshfissd_cat', cookie: { maxAge: 1800000 }, resave: true, saveUninitialized: true }));
@@ -37,6 +56,12 @@ app.use('/AuthService',authService);
 var projectService = require('./services/ProjectService');
 app.use('/ProjectService',projectService);
 
+var taskService = require('./services/TaskService');
+app.use('/TaskService',taskService);
+
+var commentService = require('./services/CommentService');
+app.use('/CommentService',commentService);
+
 //na kraju dodajemo middleware za obradu gresaka
 app.use(function(err, req, res, next) {
   var message = err.message;
@@ -48,6 +73,7 @@ app.use(function(err, req, res, next) {
     error: error
   });
 });
+
 
 //RUN SERVER
 

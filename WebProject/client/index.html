@@ -11,14 +11,16 @@
         <script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>
         <script src="jquery-1.11.0.js"></script>
         <script src="bootstrap.js"></script>
-        <script src="bootstrap-multiselect.js"></script>
         <script src="MainController.js"></script>
-        
+       
+            <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+            
         <script src="auth/AuthService.js"></script>
         <script src="auth/SignInController.js"></script>
         <script src="auth/SignOutController.js"></script>
          <script src="auth/SignUpController.js"></script>
         <script src="auth/AuthController.js"></script>
+        <script src="users/UserService.js"></script>
         <script src="project/ProjectController.js"></script>
         <script src="project/ProjectsController.js"></script>
         <script src="project/ProjectService.js"></script>
@@ -27,7 +29,8 @@
 	        media="screen" />
         <link rel="stylesheet" href="bootstrap-theme.css" type="text/css"
             media="screen" />
-        <link rel="stylesheet" href="bootstrap-multiselect.css" type="text/css" media="screen" charset="utf-8" />
+        <script src="angularjs-dropdown-multiselect.js"></script>
+        
     </head>
     <body ng-app="MyApp" ng-controller="MainController">
         <div ui-view="header"></div>

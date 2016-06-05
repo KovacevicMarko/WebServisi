@@ -12,6 +12,7 @@ var ProjectRouter = express.Router();
 ProjectRouter
   .get('/projects/', function(req, res) {
     Project.find({}, function(err, data, next) {
+      if (err) next(err);
       res.json(data);
     });
   })
@@ -19,13 +20,21 @@ ProjectRouter
     Project.findOne({
       "_id" : req.params.id
     }, function(err, data, next) {
-      res.json({success:true,data:data});
+      if (err) next(err);
+      res.json(data);
     });
+  })
+  .get('/projectsForUser/:userID', function (req,res) {
+    //todo: staviti req.session.user._id umesto parametra
+    Project.find({'usersOnProject' : req.params.userID}, function(err,data,next) {
+      if (err) next(err);
+      //console.log(pera);
+      res.json(data);
+    })
   })
   .post('/addProject', function(req, res, next) {
     var project = new Project(req.body);
     project.creator = req.session.user._id;
-    console.log('JSON:' + req.body);
     project.save(function(err, data) {
       if (err) next(err);
       
@@ -33,14 +42,17 @@ ProjectRouter
 
     });
   })
-  .post('/usersOnProject/:id', function(req, res, next){
-    Project.findOne({"_id" : req.params.id}
-    ).exec(function(err,project){
+  .post('/addUsersOnProject/:projectID', function(req, res, next){
+    Project.findOne({"_id" : req.params.projectID}
+    ).exec(function(err,data){
       if(err) next(err);
-      
+      var project = data;
       project.usersOnProject = req.body;
-      res.json(project);
-    })
+      project.save(function (err2,data) {
+        if (err2) next(err2);
+        res.json(data);
+      });
+    });
   })
   .delete('/project/:id', function(req, res, next) {
       Project.remove({

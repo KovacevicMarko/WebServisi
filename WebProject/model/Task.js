@@ -22,10 +22,10 @@ var taskSchema = new Schema({
   },
   
   status:{
-      type: String,
+      type: Schema.Types.Mixed,
       required: true
   },
-  priority:{type: String,
+  priority:{type: Schema.Types.Mixed
   },
   comments:[{
          type: Schema.Types.ObjectId,
@@ -37,7 +37,7 @@ var taskSchema = new Schema({
   updater:{
     type:String
   },
-  taskHistory:[] //celi objekti task-a ovde
+  taskUpdateHistory:[] //celi objekti task-a ovde
 });
 
 

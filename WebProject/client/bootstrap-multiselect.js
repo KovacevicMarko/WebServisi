@@ -313,7 +313,7 @@
             includeFilterClearBtn: true,
             preventInputChangeEvent: false,
             //nonSelectedText: 'None selected',
-			nonSelectedText: 'Izaberite dodatne usluge',
+			nonSelectedText: 'Choose users for this project',
             nSelectedText: 'selected',
             allSelectedText: 'All selected',
             numberDisplayed: 3,
