@@ -47,10 +47,10 @@ TaskRouter
       }  
     });
   })
-  .post('/changeTask', function (req,res,next) {
+  .post('/changeTask/:taskId', function (req,res,next) {
     var user = req.session.user;
     var changes = req.body;
-    var taskID = changes._id;
+    var taskID = req.params.taskId;
     
     Task.findOne({"_id" : taskID}, function (err, data) {
       if (err) next(err);
@@ -79,6 +79,19 @@ TaskRouter
   })
   .post('/task/:projectID', function(req,res,next) {
     var task = new Task(req.body);
+    task.creator = req.session.user._id;
+    
+    var taskV1 = {};
+    taskV1.title = task.title;
+    taskV1.description = task.description;
+    taskV1.status = task.status;
+    taskV1.priority = task.priority;
+    taskV1.deadline = task.deadline;
+    taskV1.assigned_to = task.assigned_to;
+    
+    var taskUpdate = { "taskChanges": taskV1, "dateOfChange" : new Date()};
+    task.taskUpdateHistory.push(taskUpdate); //prva verzija za cuvanje.
+
     task.save(function (err) {
       if (err) next(err);
     });
