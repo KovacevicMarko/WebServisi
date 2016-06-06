@@ -10,19 +10,23 @@
 				<form ng-submit="changeTask()" role="form">
  					<div class="form-group">
 						<label for="title">Title</label>
-						<input type="text" ng-model="task.title"  class="form-control" id="title" placeholder="Title">
+						<input type="text" ng-model="taskChange.title"  class="form-control" id="title" placeholder="Title">
 					</div>
                      <div class="form-group">
 						<label for="description">Description</label>
-						<input type="text" ng-model="task.description"  class="form-control" id="description" placeholder="Description">
+						<input type="text" ng-model="taskChange.description"  class="form-control" id="description" placeholder="Description">
 					</div>
 					<div class="form-group">
-						<label for="password">Password</label>
-						<input type="password" ng-model="password" class="form-control" id="password" placeholder="Password">
+						<label for="status">Status</label>
+						<select ng-options="value.name for (key,value) in STATUS" ng-model="taskChange.status" class="form-control" id="status"></select>
 					</div>
                     <div class="form-group">
-						<label for="password2">Repeat password</label>
-						<input type="password" ng-model="password2" class="form-control" id="password2" placeholder="Repeat password">
+						<label for="priority">Priority</label>
+						<select ng-options="value.name for (key,value) in PRIORITY" ng-model="taskChange.priority" class="form-control" id="priority"></select>
+					</div>
+					<div class="form-group">
+						<label for="deadLine">Deadline</label>
+						<input type="date" ng-model="taskChange.deadline">
 					</div>
 					<p align="center"><button type="submit" class="btn btn-sm btn-default">Sign Up</button></p>
 				</form>

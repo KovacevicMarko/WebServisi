@@ -28,6 +28,13 @@ PRIORITY = {
 }
 //-------------------------
 
+app.get('/status',function(req,res) {
+  res.json(STATUS);
+});
+
+app.get('/priority',function(req,res) {
+  res.json(PRIORITY);
+});
 //middleware za sesiju
 app.use(cookieParser());
 app.use(expressSession({ secret: 'keyboard_jdshfissd_cat', cookie: { maxAge: 1800000 }, resave: true, saveUninitialized: true }));

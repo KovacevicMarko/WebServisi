@@ -1,7 +1,7 @@
 (function(){
     var app = angular.module("MyApp");
     
-    var ProjectController = function ($scope, ProjectService, UserService, $http,$stateParams) {
+    var ProjectController = function ($scope, $rootScope, ProjectService, UserService,$window, $http,$stateParams) {
         
         //Vraca projekat za dati id
         
@@ -35,7 +35,7 @@
         }
         $scope.getAllUsers = function() {
             UserService.getAllUsers(onSuccess2,onError2);
-            
+            alert(JSON.stringify($scope.STATUS));
         }
         
         //Setovanje usersa za projekat

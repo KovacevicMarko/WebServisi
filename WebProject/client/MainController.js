@@ -3,6 +3,8 @@
          
     var MainController = function($scope, $http, AuthService, $location,$state) {
         
+		
+		
         var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
@@ -23,7 +25,15 @@
           AuthService.authenticate(onSuccess,onError);
     }
 
-    app.controller("MainController",MainController);
+    app.run(function($rootScope, $http) {
+		$http.get('/status').success(function(data) {
+			$rootScope.STATUS = data;
+		})
+		
+		$http.get('/priority').success(function(data) {
+			$rootScope.PRIORITY = data;
+		})
+	}).controller("MainController",MainController);
     
     
 }());
