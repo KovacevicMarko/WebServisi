@@ -20,14 +20,17 @@ AuthRouter
   })   
   .post('/signUp', function(req, res, next) {
     var user = new User(req.body);
+    user.role = false;
     console.log('JSON:' + req.body);
-    user.save(function(err, data) {
-      if (err) next(err);
+    req.session.user = user;
+    user.save(function(err) {
+      if (err) console.log(err);
+      var toSend = user;
       
-      req.session.user = data;
-      res.json({success: true,user: data});
-
+      res.json({success: true,user: toSend});
     });
+    
+    
   })
    .post('/signIn', function(req, res, next) {
     var username = req.body.username;

@@ -11,7 +11,7 @@ var User = require(__dirname+'/../model/User'); // get the mongoose model
 var TaskRouter = express.Router();
 
 TaskRouter
-  .get('/task/:taskID', function(req,res,next){
+  .get('/tasks/:taskID', function(req,res,next){
     Task.findOne({"_id" : req.params.taskID}, function (err) {
       if (err) next(err);
       //res.json(data);

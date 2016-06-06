@@ -17,11 +17,11 @@ var userSchema = new Schema({
   }
   
 });
-
+/*
 userSchema.pre('save', function(next) {
   next();
 });
-    
+  */  
     // od sheme kreiramo model koji cemo koristiti
 var User = mongoose.model('User', userSchema);
 // publikujemo kreirani model

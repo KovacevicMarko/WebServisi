@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module("MyApp",["ui.router", "angularjs-dropdown-multiselect"]);
+    var app = angular.module("MyApp",["ui.router", "ui.multiselect"]);
          
     var MainController = function($scope, $http, AuthService, $location,$state) {
         

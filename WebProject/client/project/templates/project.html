@@ -1,8 +1,47 @@
 <div data-ng-init="getProject()">
     <h1>{{project.title}}</h1>
-    <form>
-        <div data-ng-init="getAllUsers()">
-            <div ng-dropdown-multiselect="" options="allUsers" selected-model="users" extra-settings="settings"></div>
+    
+    <p><b>Description</b> : {{project.description}}</p>
+    <p><b>Deadline</b> : {{project.deadline}}</p>
+    <p><b>Creator</b> : {{project.creator.username}}</p>
+    
+    <div>
+        <h3>Tasks</h3> 
+        <table class="table table-striped">
+                
+            <thead>
+            <tr>  
+                <th>Title</th>
+                <th>Description</th>
+                <th>Creator</th>
+                <th>Assigned to</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Created at</th>
+                <th>Deadline</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+            <tr ng-repeat="task in project.tasks">
+                <td><a href="#/tasks/{{task._id}}">{{task.title}}</a></td>
+                <td>{{task.description}}</td>
+                <td>{{task.creator.username}}</td>
+                <td>{{task.assigned_to.username}}</td>
+                <td>{{task.status.name}}</td>
+                <td>{{task.priority.name}}</td>
+                <td>{{task.createdAt}}</td>
+                <td>{{task.deadline}}</td>
+            </tr>  
+            </tbody>
+        </table>
+    </div>
+    <form ng-submit="setUsersOnProject()">
+        <div class="form-group" data-ng-init="getAllUsers()">
+            <h4>Choose team: </h4>
+            <multiselect ng-model="team" options="u.username for u in allUsers" multiple="true"></multiselect>
         </div>
+        <button ng-click="resetUsersOnProject()" type="button" class="btn btn-warning">Reset</button>
+        <input type="submit" class="btn btn-info" value="Set team">
     </form>
 </div>

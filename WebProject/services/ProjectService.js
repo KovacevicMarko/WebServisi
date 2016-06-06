@@ -17,9 +17,27 @@ ProjectRouter
     });
   })
   .get('/projects/:id', function(req, res) {
+    var populateQuery = [{
+      path : "tasks",
+      model: "Task",
+      populate : [
+          { path: "creator", model:"User"},
+          { path: "assigned_to", model:"User"}
+        ]
+    }, 
+    {
+      path : "creator",
+      model: "User"
+    },
+    {
+      path: "usersOnProject",
+      model:"User"
+    }];
+    
     Project.findOne({
       "_id" : req.params.id
-    }, function(err, data, next) {
+    }).populate(populateQuery)
+    .exec(function(err, data, next) {
       if (err) next(err);
       res.json(data);
     });
@@ -42,15 +60,19 @@ ProjectRouter
 
     });
   })
-  .post('/addUsersOnProject/:projectID', function(req, res, next){
+  .post('/setUsersOnProject/:projectID', function(req, res, next){
     Project.findOne({"_id" : req.params.projectID}
     ).exec(function(err,data){
       if(err) next(err);
       var project = data;
       project.usersOnProject = req.body;
-      project.save(function (err2,data) {
+      project.save(function (err2) {
         if (err2) next(err2);
-        res.json(data);
+        project.populate('usersOnProject',function (err3) {
+          if (err3) next(err3);
+          res.json(project);
+        });
+        
       });
     });
   })

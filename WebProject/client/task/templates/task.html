@@ -1,0 +1,60 @@
+<div data-ng-init="getTask()">
+    
+    <div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><strong>Task information</strong></h3>
+			</div>
+			
+			<div class="panel-body">
+				<form ng-submit="changeTask()" role="form">
+ 					<div class="form-group">
+						<label for="title">Title</label>
+						<input type="text" ng-model="task.title"  class="form-control" id="title" placeholder="Title">
+					</div>
+                     <div class="form-group">
+						<label for="description">Description</label>
+						<input type="text" ng-model="task.description"  class="form-control" id="description" placeholder="Description">
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" ng-model="password" class="form-control" id="password" placeholder="Password">
+					</div>
+                    <div class="form-group">
+						<label for="password2">Repeat password</label>
+						<input type="password" ng-model="password2" class="form-control" id="password2" placeholder="Repeat password">
+					</div>
+					<p align="center"><button type="submit" class="btn btn-sm btn-default">Sign Up</button></p>
+				</form>
+  			</div>
+		</div>
+	</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <form ng-submit="changeTask()">
+        <h1>{{task.title}}</h1>
+        
+        <p><b>Description</b> : {{task.description}}</p>
+        <p><b>Deadline</b> : {{task.deadline}}</p>
+        <p><b>Creator</b> : {{task.creator.username}}</p>
+        <p><b>Assigned to</b> : {{task.assigned_to.username}}</p>
+        <div>
+            <h3>Tasks</h3> 
+            
+        </div>
+    
+        <div class="form-group" data-ng-init="getAllUsers()">
+            <h4>Choose team: </h4>
+            <multiselect ng-model="team" options="u.username for u in allUsers" multiple="true"></multiselect>
+        </div>
+        <button ng-click="resetUsersOnProject()" type="button" class="btn btn-warning">Reset</button>
+        <input type="submit" class="btn btn-info" value="Set team">
+    </form>
+</div>

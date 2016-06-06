@@ -27,8 +27,7 @@
            }
            else {
                AuthService.signup(
-			   $scope.username,
-			   $scope.role, 
+			   $scope.username, 
 			   $scope.password, 
 			   onSuccess
 			   ,onError);

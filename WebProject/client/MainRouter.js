@@ -42,6 +42,21 @@
               controller: 'ProjectController'
             }
         }            
-        });
+        })
+        .state('task', {
+            url: '/tasks/:id',
+            views: {
+                header:{
+                    templateUrl: 'auth/templates/headerL.html',
+                    controller: 'AuthController'
+                },
+                content: {
+                    templateUrl: 'task/templates/task.html',
+                    controller: 'TaskController'
+                }
+            }  
+        }
+            
+        );
     });
 }())

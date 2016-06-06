@@ -15,7 +15,7 @@ angular.module('MyApp')
 		$http(req).then(onSuccess, onError);
 		
 		},
-		signup: function(username, role, password, onSuccess, onError){
+		signup: function(username, password, onSuccess, onError){
 
 		var req = {
 		    method: 'POST',
@@ -25,10 +25,7 @@ angular.module('MyApp')
 		    },
 		    data: { 
 		    	username: username,
-		    	//email: email,
-		    	password: password ,
-                
-                role : role
+		    	password: password
 		    }
 		}
 		// ODE MI 5 SATI NA OVO

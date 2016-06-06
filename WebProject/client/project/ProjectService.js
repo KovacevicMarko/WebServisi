@@ -38,10 +38,10 @@ angular.module('MyApp')
 		$http(req).then(onSuccess, onError);
 		
 		},
-		addUsersOnProject: function (onSuccess,onError,projectId,data) {
+		setUsersOnProject: function (onSuccess,onError,projectId,data) {
             var req = {
                 method : "POST",
-                url : '/ProjectService/usersOnProject/'+projectId,
+                url : '/ProjectService/setUsersOnProject/'+projectId,
                 data : data
             }
             
