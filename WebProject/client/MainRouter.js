@@ -31,7 +31,7 @@
         }            
         })
         .state('project',{//naziv stanja!
-        url: '/projects/:id',
+        url: '/projects/:projectId',
         views: {
             header:{
                 templateUrl: 'auth/templates/headerL.html',
@@ -43,8 +43,8 @@
             }
         }            
         })
-        .state('task', {
-            url: '/tasks/:id',
+        .state('project.task', {
+            url: '/tasks/:taskId',
             views: {
                 header:{
                     templateUrl: 'auth/templates/headerL.html',

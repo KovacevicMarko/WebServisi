@@ -5,7 +5,7 @@
         
         //Vraca projekat za dati id
         
-        var id = $stateParams.id;
+        var id = $stateParams.projectId;
         
         var onSuccess = function(response){	  
             $scope.project = response.data;
