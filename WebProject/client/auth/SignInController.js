@@ -8,17 +8,17 @@
 		var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
-				alertify.success("WELCOME!");
+				
 				$state.go('main');
 			}else{
-				alertify.error("ERROR");
+				//alertify.error("ERROR");
 			}
 
 		};
 		
 		var onError = function(response){
 			console.log(response.data);
-			alertify.error("ERROR");
+			//alertify.error("ERROR");
 		}
 			   
         $scope.signin = function(){

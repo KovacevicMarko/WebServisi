@@ -43,8 +43,8 @@
             }
         }            
         })
-        .state('project.task', {
-            url: '/tasks/:taskId',
+        .state('task', {
+            url: '/projects/:projectId/tasks/:taskId',
             views: {
                 header:{
                     templateUrl: 'auth/templates/headerL.html',
@@ -52,7 +52,7 @@
                 },
                 content: {
                     templateUrl: 'task/templates/task.html',
-                    //controller: 'TaskController'
+                    controller: 'TaskController'
                 }
             }  
         }

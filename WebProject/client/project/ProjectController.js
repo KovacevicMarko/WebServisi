@@ -14,7 +14,7 @@
 		
         var onError = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertifyy.error("ERROR");
         }
         
         $scope.getProject = function () {
@@ -31,11 +31,11 @@
 		
         var onError2 = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertifyy.error("ERROR");
         }
         $scope.getAllUsers = function() {
             UserService.getAllUsers(onSuccess2,onError2);
-            alert(JSON.stringify($scope.STATUS));
+            //alert(JSON.stringify($scope.STATUS));
         }
         
         //Setovanje usersa za projekat
@@ -47,7 +47,7 @@
         
         var onError3 = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertifyy.error("ERROR");
         }
         
         

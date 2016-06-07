@@ -14,10 +14,10 @@
             
             var taskC = {};
             taskC.title = $scope.task.title;
-            taskC.desription = $scope.task.desription;
+            taskC.description = $scope.task.description;
             taskC.status = $scope.task.status;
             taskC.priority = $scope.task.priority;
-            taskC.deadline = $scope.task.deadline;
+            taskC.deadline = new Date($scope.task.deadline);
             taskC.assigned_to = $scope.task.assigned_to;
             
             $scope.taskChange = taskC;
@@ -26,7 +26,7 @@
 		
         var onError = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertify.error("ERROR");
         };
         
         $scope.getTask = function () {
@@ -45,7 +45,7 @@
         
          var onError1 = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertify.error("ERROR");
         };
         
         $scope.addTask = function () {
@@ -65,7 +65,7 @@
         };
          var onError2 = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertify.error("ERROR");
         };
         
         $scope.changeTask = function () {
@@ -90,7 +90,7 @@
                }
                else break;
            }
-           if(!change){
+           if(!changes){
                alert('No changes!');
            }
            else{

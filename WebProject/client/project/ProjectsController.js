@@ -10,7 +10,7 @@
 		
 	      	var onError1 = function(response){
 	     		console.log(response.data);
-	    		alertify.error("ERROR");
+	    		//alertifyy.error("ERROR");
 		      }
           
           $scope.getProjects = function () {
@@ -29,7 +29,7 @@
 		
 	      	var onError2 = function(response){
 	     		console.log(response.data);
-	    		alertify.error("ERROR");
+	    		//alertifyy.error("ERROR");
 		      }
           
           $scope.addProject = function () {

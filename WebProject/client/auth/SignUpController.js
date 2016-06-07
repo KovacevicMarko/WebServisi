@@ -8,17 +8,17 @@
 		var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
-				alertify.success("Uspesno ste se prijavili!");
+				//alertifyy.success("Uspesno ste se prijavili!");
 				$state.go('main');
 			}else{
-				alertify.error("ERROR");
+				//alertifyy.error("ERROR");
 			}
 
 		};
 		
 		var onError = function(response){
 			console.log(response.data);
-			alertify.error("ERROR");
+			//alertifyy.error("ERROR");
 		}
 			   
         $scope.signup = function(){

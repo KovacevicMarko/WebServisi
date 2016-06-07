@@ -8,10 +8,10 @@
 		var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
-				alertify.success("WELCOME!");
+				
 				$scope.user = response.data.user;
 			}else{
-				alertify.error("ERROR");
+				
                 $state.go('login');
 			}
 
@@ -19,7 +19,7 @@
 		
 		var onError = function(response){
 			console.log(response.data);
-			alertify.error("ERROR");
+			
 		}
 			   
         $scope.authenticate = function(){

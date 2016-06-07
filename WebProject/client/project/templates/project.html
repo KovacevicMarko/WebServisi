@@ -24,7 +24,7 @@
             
             <tbody>
             <tr ng-repeat="task in project.tasks">
-                <td><a href="#/tasks/{{task._id}}">{{task.title}}</a></td>
+                <td><a ui-sref="task({projectId: project._id, taskId:task._id})">{{task.title}}</a></td>
                 <td>{{task.description}}</td>
                 <td>{{task.creator.username}}</td>
                 <td>{{task.assigned_to.username}}</td>
