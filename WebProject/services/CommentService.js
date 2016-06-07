@@ -19,6 +19,15 @@ CommentRouter
       res.json(data);
     })
   })
+  .get('/comments/:taskID',function(req,res,next){
+    
+    Task.findOne({"_id":req.params.taskID}).populate('comments')
+        .exec(function(err,data){
+     
+        if(err) next(err);     
+        res.json(data.comments);
+  });
+  })
   .post('/addComment/:taskID', function(req, res, next) {
     var comment = new Comment(req.body);
     //todo: comment.creator = req.session.user._id;
@@ -37,7 +46,7 @@ CommentRouter
             
             task.populate("comments",function(err) {
                 if (err) next(err);
-                res.json(task);
+                res.json(comment);
             });
         });
       });
@@ -74,7 +83,7 @@ CommentRouter
           }
           task.save(function(err) {
               if (err) next(err);
-              res.json(task);
+              //res.json(task);
           });
       })
   });
