@@ -52,7 +52,7 @@
                 },
                 content: {
                     templateUrl: 'task/templates/task.html',
-                    //controller: 'TaskController'
+                    controller: 'TaskController'
                 }
             }  
         }
