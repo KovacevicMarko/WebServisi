@@ -45,11 +45,12 @@
     <div ng-include="'task/templates/addTask.html'"></div>
     <br/>
     <br/>
-    
+    {{team}}
     <form ng-if="user.role==true" ng-submit="setUsersOnProject()">
         <div class="form-group" data-ng-init="getAllUsers()">
             <h4>Choose team: </h4>
             <multiselect ng-model="team" options="u.username for u in allUsers" multiple="true"></multiselect>
+            
         </div>
         <button ng-click="resetUsersOnProject()" type="button" class="btn btn-warning">Reset</button>
         <input type="submit" class="btn btn-info" value="Set team">

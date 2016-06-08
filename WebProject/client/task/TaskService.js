@@ -1,6 +1,19 @@
 angular.module('MyApp')
 .service('TaskService', function($http){
 	return{
+        
+        getTasks: function(onSuccess,onError) {
+            
+            var req = {
+                method : "GET",
+                url: "/TaskService/tasks/",
+                headers: {
+                     'Content-Type': "application/json"
+                         }
+             }	
+
+		    $http(req).then(onSuccess, onError);
+        },
 		
         getTask: function(onSuccess, onError,taskId){
 		

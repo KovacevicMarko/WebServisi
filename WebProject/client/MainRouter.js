@@ -12,8 +12,8 @@
                 controller: 'AuthController'
             },
             content: {
-              templateUrl: 'project/templates/projects.html',
-              controller: 'ProjectsController'
+              templateUrl: 'dashboard/dashboard.html',
+              controller: 'DashboardController'
             }
         }
         })

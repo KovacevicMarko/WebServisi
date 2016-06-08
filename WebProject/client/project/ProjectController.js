@@ -60,7 +60,7 @@
         //Reset usersa za project na stranici
         
         $scope.resetUsersOnProject = function () {
-            $scope.team = $scope.project.usersOnProject;
+            $scope.team.team = $scope.project.usersOnProject;
         }
         
 

@@ -28,6 +28,22 @@ TaskRouter
       res.json(data);
     })
   })
+  .get('/tasks',function(req,res,next){
+    
+   if (req.session.user.role) {
+        Task.find({}).populate('creator').populate('assigned_to').exec(function(err, data) {
+          if (err) next(err);
+          res.json(data);
+        });
+    }
+    else {
+        Task.find({'assigned_to' : req.session.user._id}).populate('creator').populate('assigned_to')
+        .exec(function(err,data) {
+          if (err) next(err);
+          res.json(data);
+        });
+    }
+  })
   .get('/tasksForProject/:projectID', function(req, res) {
     // vraca sve taskove na datom projektu
     Project.findOne({"_id":req.params.projectID}, function(err,data, next) {
