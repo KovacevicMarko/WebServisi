@@ -3,13 +3,19 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 var projectSchema = new Schema({
+  code: {
+    type: String,
+    required: true,
+    unique: true
+  },
   title: {
     type: String,
     required: true,
     unique: true
   },
+  
   description: {
-    type: String,
+    type: String
   },
   deadline: Date,
   createdAt: Date,
@@ -22,7 +28,11 @@ var projectSchema = new Schema({
   tasks:[{
        type: Schema.Types.ObjectId,
        ref: 'Task'
-              }]
+              }],
+   taskNumber : {
+     type : Number,
+     default : 0
+   }
 });
 /**
  * // napomena! komentari su u ovom primeru implementirani kao reference zbog ilustracije rada sa referencama

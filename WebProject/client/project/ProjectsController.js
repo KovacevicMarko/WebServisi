@@ -38,13 +38,21 @@
                 onError2,
                 {
                   title : $scope.title,
+                  code : $scope.code,
                   description : $scope.description,
                   deadline : $scope.deadline
                 }
                 );    
           };
         
+        
         //end with addProject method
+        
+        $scope.clearInputs = function () {
+            alert($scope.title);
+            //delete $scope.description;
+            //delete $scope.deadline;    
+        }
     };
 
     app.controller("ProjectsController", ProjectsController);

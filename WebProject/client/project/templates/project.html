@@ -1,16 +1,19 @@
 <div data-ng-init="getProject()">
     <h1>{{project.title}}</h1>
-    
+    <p><b>Code</b> : {{project.code}}</p>
     <p><b>Description</b> : {{project.description}}</p>
     <p><b>Deadline</b> : {{project.deadline}}</p>
     <p><b>Creator</b> : {{project.creator.username}}</p>
-    
+    <br/>
+    <br/>
+
     <div>
         <h3>Tasks</h3> 
         <table class="table table-striped">
                 
             <thead>
-            <tr>  
+            <tr>
+                <th>Code</th>  
                 <th>Title</th>
                 <th>Description</th>
                 <th>Creator</th>
@@ -24,7 +27,8 @@
             
             <tbody>
             <tr ng-repeat="task in project.tasks">
-                <td><a ui-sref="task({projectId: project._id, taskId:task._id})">{{task.title}}</a></td>
+                <td><a ui-sref="task({projectId: project._id, taskId:task._id})">{{task.code}}</a></td>
+                <td>{{task.title}}</td>
                 <td>{{task.description}}</td>
                 <td>{{task.creator.username}}</td>
                 <td>{{task.assigned_to.username}}</td>
@@ -36,6 +40,12 @@
             </tbody>
         </table>
     </div>
+    
+    
+    <div ng-include="'task/templates/addTask.html'"></div>
+    <br/>
+    <br/>
+    
     <form ng-submit="setUsersOnProject()">
         <div class="form-group" data-ng-init="getAllUsers()">
             <h4>Choose team: </h4>

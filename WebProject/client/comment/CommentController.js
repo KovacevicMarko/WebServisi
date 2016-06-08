@@ -3,7 +3,8 @@
     
     var CommentController = function ($scope,CommentService,TaskService,ProjectService,UserService, $http,$stateParams) {
         
-       
+        //$scope.editMode = false;
+        $scope.commentChange = {};
         ///var projectId = $stateParams.projectId;
         var taskId = $stateParams.taskId;
         
@@ -29,7 +30,8 @@
         //Dodavanje komentara
         
          var onSuccess1 = function(response) {
-            //$scope.task = response.data;
+            $scope.task = response.data;
+            delete $scope.newComment;
         };
         
          var onError1 = function(response){
@@ -50,38 +52,60 @@
         // Izmena komentara
         
         var onSuccess2 = function(response) {
-            //$scope.task = response.data;
+            // u response je promenjeni komentara
+            // task na scope-u mora da se update-uje
+            var comment = response.data;
+            for (var i = 0; i < $scope.task.comments.length; i++) {
+                if ($scope.task.comments[i]._id === comment._id) {
+                    $scope.task.comments[i].text = comment.text;
+                    break;
+                }
+            }
         };
          var onError2 = function(response){
             console.log(response.data);
-            alertify.error("ERROR");
+            //alertify.error("ERROR");
         };
         
-        $scope.changeComment = function () {
+        $scope.changeComment = function (comment, commentChangeText) {
                
-               TaskService.changeTask(
+               var data = {commentID:comment._id, text:commentChangeText};
+               CommentService.changeComment(
                     onSuccess2,
                     onError2,
-                    commentChange,
+                    data
                )
-           
+              $scope.disableEditMode(comment);
         };
+        
+        $scope.enableEditMode = function (comment) {
+            comment.editMode = true;
+            $scope.commentChange.text = comment.text;
+            //$scope.editMode = true;
+            
+        }
+        
+        
+        $scope.disableEditMode = function (comment) {
+            comment.editMode = false;
+            //$scope.editMode = false;
+        }
         
          // Brisanje komentara
         
         var onSuccess3 = function(response) {
-            //$scope.task = response.data;
+            $scope.task = response.data;
         };
          var onError3 = function(response){
             console.log(response.data);
             alertify.error("ERROR");
         };
         
-        $scope.deleteComment = function () {
+        $scope.deleteComment = function (commentId) {
                
                var data = {'taskID' : taskId}; 
                        
-               CommentService.changeTask(
+               CommentService.deleteComment(
                     onSuccess3,
                     onError3,
                     data,

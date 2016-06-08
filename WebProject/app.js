@@ -12,19 +12,19 @@ var port = process.env.PORT || 8080; // na kom portu slusa server
 // ENUMERACIJE
 // STATUSI
 STATUS = {
-  TODO : {value: 0, name: "To Do"},
-  INPROGRESS : {value : 1, name: "In Progress"},
-  VERIFY : {value : 2, name : "Verify"},
-  DONE : {value : 3, name : "Done"}
+  TODO : {name: "To Do", value: 0},
+  INPROGRESS : {name: "In Progress",value : 1 },
+  VERIFY : {name : "Verify",value : 2 },
+  DONE : {name : "Done", value : 3 }
 }
 
 // PRIORITETI
 PRIORITY = {
-  TRIVIAL : {value: 0, name: "Trivial"},
-  MINOR: {value: 1, name: "Minor"},
-  MAJOR: {value: 2, name: "Major"},
-  CRITICAL: {value: 3, name: "Critical"},
-  BLOCKER: {value: 4, name: "Blocker"},
+  TRIVIAL : {name: "Trivial", value : 0},
+  MINOR: {name: "Minor",value : 1},
+  MAJOR: {name: "Major",value : 2},
+  CRITICAL: {name: "Critical",value : 3},
+  BLOCKER: {name: "Blocker",value : 4 },
 }
 //-------------------------
 
@@ -48,11 +48,12 @@ app.use(bodyParser.json());
 //Klijentska aplikacija
 app.use('/', express.static(__dirname+'/client'));
 
+/*
 app.get("/",function (req,res) {
   res.sendfile(__dirname + '/client/index.html');
 }).get("/login.html",function (req,res) {
   res.sendfile(__dirname + '/client/login.html');});
-
+*/
 //Servisi
 var userService = require('./services/UserService');
 app.use('/UserService/',userService);

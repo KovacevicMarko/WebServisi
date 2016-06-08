@@ -10,6 +10,9 @@
 			if(response.data.success==true){
 				
 				$scope.user = response.data.user;
+				if ($state.current.name == "login") {
+					$state.go('main');
+				}
 			}else{
 				
                 $state.go('login');

@@ -22,7 +22,7 @@
         views: {
             header:{
                 templateUrl: 'auth/templates/headerNL.html',
-                controller: 'SignInController'
+                controller: 'AuthController'
             },
             content: {
               templateUrl: 'auth/templates/signUp.html',

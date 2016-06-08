@@ -23,7 +23,7 @@ angular.module('MyApp')
               headers: {
                      'Content-Type': "application/json"
                      },
-              data : data
+              data : {text:data}
             }
         
           $http(req).then(onSuccess, onError);
@@ -49,6 +49,9 @@ angular.module('MyApp')
             var req = {
                 method : "Delete",
                 url: "/CommentService/comment/"+commentId,
+                headers: {
+                        'Content-Type': "application/json"
+                        },
                 data : data
             }
             

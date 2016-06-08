@@ -2,14 +2,18 @@
     <table class="table table-striped">
 		<thead>
             <tr>
-				<th>Naziv projekta</th>
-				<th>Opis projekta</th>
+                <th>Code</th>
+				<th>Title</th>
+                <th>Description</th>
+                <th>Deadline</th>
 			</tr>
          </thead>
          <tbody>
              <tr ng-repeat="project in projects">
-                 <td><a href="#/projects/{{project._id}}">{{ project.title }}</a></td>
+                 <td><a href="#/projects/{{project._id}}">{{ project.code }}</a></td>
+                 <td>{{ project.title }}</td>
                  <td>{{ project.description }}</td>
+                 <td>{{ project.deadline }}</td>
              </tr>
          </tbody>
     </table>    

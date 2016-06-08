@@ -18,7 +18,7 @@
         }
         
         $scope.getProject = function () {
-              ProjectService.getProject(id, onSuccess,onError);
+              ProjectService.getProject(onSuccess,onError,id);
                
         }
         
@@ -63,6 +63,8 @@
         $scope.resetUsersOnProject = function () {
             $scope.team = $scope.project.usersOnProject;
         }
+        
+
     }
     
     app.controller("ProjectController",ProjectController);

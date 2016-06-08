@@ -1,14 +1,29 @@
 (function(){
     var app = angular.module("MyApp");
     
-    var TaskController = function ($scope, TaskService,ProjectService,UserService, $http,$stateParams) {
+    var TaskController = function ($scope, TaskService,ProjectService,UserService, $http,$stateParams,$window) {
         
        
         var projectId = $stateParams.projectId;
         var taskId = $stateParams.taskId;
         
-         //Vraca task za dati id
+         
+        //vraca projekat kome pripada ovaj task
+         var onSuccess0 = function(response){	  
+            $scope.project = response.data;
+	    };
+        var onError0 = function(response){
+            console.log(response.data);
+            //alertify.error("ERROR");
+        };
+        $scope.getProject = function () {
+            ProjectService.getProject(onSuccess0, onError0, projectId);
+        }
         
+       
+        
+        
+        //Vraca task za dati id
         var onSuccess = function(response){	  
             $scope.task = response.data;
             
@@ -40,7 +55,8 @@
         //Dodavanje Taska
         
          var onSuccess1 = function(response) {
-            $scope.task = response.data;
+            //$scope.project = response.data;
+            $window.location.reload();
         };
         
          var onError1 = function(response){
@@ -49,6 +65,9 @@
         };
         
         $scope.addTask = function () {
+            if ($scope.newTask.assigned_to == undefined) {
+                $scope.newTask.assigned_to = null;
+            }
               TaskService.addTask(
               onSuccess1,
               onError1,
@@ -62,6 +81,7 @@
         
         var onSuccess2 = function(response) {
             $scope.task = response.data;
+            alert("Succesfully edited task")
         };
          var onError2 = function(response){
             console.log(response.data);
@@ -79,10 +99,27 @@
            for(var prop_i in $scope.taskChange){
                if (!changes) {
                    for(var prop_j in $scope.task){
-                        if(prop_i === prop_j){
-                            
-                            if($scope.taskChange[prop_i] !== $scope.task[prop_j]) {
-                                changes = true;   
+                        if(prop_i == prop_j){
+                            if (prop_i == "status" || prop_i == "priority") {
+                                if ($scope.taskChange[prop_i].value != $scope.task[prop_j].value) {
+                                    changes = true;
+                                }
+                            }
+                            else if (prop_i == "assigned_to") {
+                                if ($scope.taskChange[prop_i] == null && $scope.task[prop_j] == null) {
+                                    
+                                }
+                                else if ($scope.taskChange[prop_i] == null || $scope.task[prop_j] == null) {
+                                    changes = true;
+                                }
+                                else if ($scope.taskChange[prop_i].username != $scope.task[prop_j].username) {
+                                    changes = true;
+                                } 
+                            }
+                            else {
+                                if(JSON.stringify($scope.taskChange[prop_i]) != JSON.stringify($scope.task[prop_j])) {
+                                    changes = true;   
+                                }
                             }
                             break;
                         }

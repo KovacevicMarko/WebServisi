@@ -25,7 +25,7 @@ angular.module('MyApp')
             
          $http(req).then(onSuccess, onError);
         },
-        getProject: function(id,onSuccess, onError){
+        getProject: function(onSuccess, onError,id){
 		
 		var req = {
                 method : "GET",

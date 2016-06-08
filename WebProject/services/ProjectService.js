@@ -37,8 +37,8 @@ ProjectRouter
     Project.findOne({
       "_id" : req.params.id
     }).populate(populateQuery)
-    .exec(function(err, data, next) {
-      if (err) next(err);
+    .exec(function(err, data) {
+      if (err) console.log(err);
       res.json(data);
     });
   })
@@ -54,7 +54,7 @@ ProjectRouter
     var project = new Project(req.body);
     project.creator = req.session.user._id;
     project.save(function(err, data) {
-      if (err) next(err);
+      if (err) console.log(err);
       
       res.json({success:true,data:data});
 

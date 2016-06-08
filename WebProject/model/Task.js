@@ -3,10 +3,14 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 var taskSchema = new Schema({
+  code: {
+    type : String,
+    required : true,
+    unique : true
+  },
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   description: {
     type: String,
@@ -35,9 +39,6 @@ var taskSchema = new Schema({
   deadline: Date,
   createdAt: Date,
   updatedAt: Date,
-  updater:{
-    type:String
-  },
   taskUpdateHistory:[] //celi objekti task-a ovde
 });
 

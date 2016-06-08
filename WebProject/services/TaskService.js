@@ -12,10 +12,17 @@ var TaskRouter = express.Router();
 
 TaskRouter
   .get('/tasks/:taskID', function(req,res,next){
+    var populateQuery = {
+      path: "comments",
+      model: "Comment",
+      populate : 
+          { path: "creator", model:"User"}
+    };
+    
     Task.findOne({"_id" : req.params.taskID}, function (err) {
       if (err) next(err);
       //res.json(data);
-    }).populate('assigned_to').populate('comments')
+    }).populate('assigned_to').populate(populateQuery).populate('creator')
     .exec(function(err,data){
       if(err) next(err);
       res.json(data);
@@ -52,7 +59,7 @@ TaskRouter
     var changes = req.body;
     var taskID = req.params.taskId;
     
-    Task.findOne({"_id" : taskID}, function (err, data) {
+    Task.findOne({"_id" : taskID}).populate('creator').exec(function (err, data) {
       if (err) next(err);
       var task = data;
       
@@ -71,7 +78,7 @@ TaskRouter
       //task.status = STATUS.INPROGRESS;
       task.save(function(err) {
         if (err) next(err);
-        
+        task.populate('assigned_to');
         res.json(task);
       });
       
@@ -92,17 +99,25 @@ TaskRouter
     var taskUpdate = { "taskChanges": taskV1, "dateOfChange" : new Date()};
     task.taskUpdateHistory.push(taskUpdate); //prva verzija za cuvanje.
 
-    task.save(function (err) {
-      if (err) next(err);
-    });
     
-    Project.find({"_id" : req.params.projectID},
+    
+    Project.findOne({"_id" : req.params.projectID},
       function(err,data){
         if(err) next(err);
-        var project = data[0];
+        var project = data;
         project.tasks.push(task._id);
-        project.save();
-        res.json(project);
+        project.taskNumber += 1;
+        task.code = project.code + "_" + project.taskNumber;
+        task.save(function (err) {
+            if (err) console.log(err);
+            task.populate('creator').populate('assigned_to');
+        });
+        
+        project.save(function(err) {
+          if (err) console.log(err);
+          res.json(project);
+        });
+        
       });
   })
   .delete('/task/:taskID',function(req,res,next) {

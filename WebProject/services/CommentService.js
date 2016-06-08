@@ -11,6 +11,13 @@ var Comment = require(__dirname+'/../model/Comment'); // get the mongoose model
 
 var CommentRouter = express.Router();
 
+var populateQuery = {
+                path: "comments",
+                model: "Comment",
+                populate : 
+                    { path: "creator", model:"User"}
+            };
+
 CommentRouter
     .get('/comment/:commentID', function(req,res,next){
         //todo: populate creator.username
@@ -21,7 +28,7 @@ CommentRouter
   })
   .get('/comments/:taskID',function(req,res,next){
     
-    Task.findOne({"_id":req.params.taskID}).populate('comments')
+    Task.findOne({"_id":req.params.taskID}).populate(populateQuery)
         .exec(function(err,data){
      
         if(err) next(err);     
@@ -30,7 +37,7 @@ CommentRouter
   })
   .post('/addComment/:taskID', function(req, res, next) {
     var comment = new Comment(req.body);
-    //todo: comment.creator = req.session.user._id;
+    comment.creator = req.session.user._id;
     comment.save(function (err) {
       if (err) next(err);
     });
@@ -43,10 +50,9 @@ CommentRouter
         task.comments.push(comment._id);
         task.save(function(err) {
             if (err) next(err);
-            
-            task.populate("comments",function(err) {
+            task.populate(populateQuery,function(err) {
                 if (err) next(err);
-                res.json(comment);
+                res.json(task);
             });
         });
       });
@@ -73,7 +79,7 @@ CommentRouter
       Comment.remove({"_id" : commentID}, function(err,data) {
           if (err) next(err);
       });
-      Task.findOne({"_id" : taskID}, function(err,data) {
+      Task.findOne({"_id" : taskID}).populate(populateQuery).exec(function(err,data) {
           if (err) next(err);
           var task = data;
           var coms = task.comments;
@@ -83,9 +89,9 @@ CommentRouter
           }
           task.save(function(err) {
               if (err) next(err);
-              //res.json(task);
+              res.json(task);
           });
-      })
+      });
   });
 
 
