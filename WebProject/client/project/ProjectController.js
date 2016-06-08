@@ -9,7 +9,8 @@
         
         var onSuccess = function(response){	  
             $scope.project = response.data;
-            $scope.team = $scope.project.usersOnProject;
+            $scope.team = {};
+            $scope.team = {team : $scope.project.usersOnProject};
 	    };
 		
         var onError = function(response){
@@ -39,7 +40,7 @@
         
         //Setovanje usersa za projekat
         var onSuccess3 = function (response) {
-            $scope.team = response.data.usersOnProject;
+            $scope.team.team = response.data.usersOnProject;
             //$scope.project.usersOnProject = $scope.team;
             alert("Successfully set team");
         }
@@ -51,7 +52,8 @@
         
         
         $scope.setUsersOnProject = function () {
-            var teamIDs = $scope.team.map(function(user) { return user._id;});
+            console.log($scope.team.team);
+            var teamIDs = $scope.team.team.map(function(user) { return user._id;});
             ProjectService.setUsersOnProject(onSuccess3,onError3,projectId, teamIDs);
                 
                         
