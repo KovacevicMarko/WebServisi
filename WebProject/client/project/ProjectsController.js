@@ -1,7 +1,7 @@
 (function(){
     var app = angular.module("MyApp");
     
-    var ProjectsController = function ($scope, ProjectService, $http,$window) {
+    var ProjectsController = function ($scope,$rootScope, ProjectService, $http,$window) {
         
         // getProjects method
          var onSuccess1 = function(response){	  
@@ -49,9 +49,10 @@
         //end with addProject method
         
         $scope.clearInputs = function () {
-            alert($scope.title);
-            //delete $scope.description;
-            //delete $scope.deadline;    
+            delete $scope.code;
+            delete $scope.title;
+            delete $scope.description;
+            delete $scope.deadline;    
         }
     };
 

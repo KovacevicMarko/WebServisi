@@ -1,7 +1,9 @@
 (function() {
+	
+			
     var app = angular.module("MyApp",["ui.router", "ui.multiselect"]);
          
-    var MainController = function($scope, $http, AuthService, $location,$state) {
+    var MainController = function($scope, $rootScope, $http, AuthService, $location,$state) {
         
 		
 		
@@ -9,7 +11,7 @@
 			console.log(response.data);
 			if(response.data.success==true){
 				//alertifyy.success("WELCOME!");
-				$scope.user = response.data.user;
+				$rootScope.user = response.data.user;
 			}else{
 				//alertifyy.error("ERROR");
                 $state.go('login');

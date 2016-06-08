@@ -8,7 +8,7 @@
 		var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
-				
+				$scope.user = response.data.user;
 				$state.go('main');
 			}else{
 				//alertify.error("ERROR");

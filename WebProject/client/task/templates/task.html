@@ -68,7 +68,7 @@
 						<strong>{{comment.creator.username}}</strong>
 						<span class="text-muted">commented at {{comment.updatedAt}}</span>
 						<span class="pull-right">
-							<span ng-if="!comment.editMode">
+							<span ng-if="!comment.editMode && (comment.creator._id == user._id || user.role)">
 								<button ng-click="enableEditMode(comment)" class="btn btn-warning btn-xs">Edit</button>
 								<button ng-click="deleteComment(comment._id)" class="btn btn-danger btn-xs">Delete</button>
 							</span>

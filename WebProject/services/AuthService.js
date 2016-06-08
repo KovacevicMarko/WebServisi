@@ -61,7 +61,7 @@ AuthRouter
 
         req.session.destroy(function(err) {
             // cannot access session here
-            console.log('nema sessijee');
+           // console.log('nema sessijee');
         });
 
         res.send({success: true, msg:"Logged out"});

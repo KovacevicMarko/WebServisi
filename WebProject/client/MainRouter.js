@@ -12,7 +12,7 @@
                 controller: 'AuthController'
             },
             content: {
-              templateUrl: 'project/projects.html',
+              templateUrl: 'project/templates/projects.html',
               controller: 'ProjectsController'
             }
         }
@@ -27,6 +27,19 @@
             content: {
               templateUrl: 'auth/templates/signUp.html',
               controller: 'SignUpController'
+            }
+        }            
+        })  
+        .state('projects',{//naziv stanja!
+        url: '/projects',
+        views: {
+            header:{
+                templateUrl: 'auth/templates/headerL.html',
+                controller: 'AuthController'
+            },
+            content: {
+              templateUrl: 'project/templates/projects.html',
+              controller: 'ProjectsController'
             }
         }            
         })

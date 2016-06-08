@@ -11,10 +11,20 @@ var ProjectRouter = express.Router();
 
 ProjectRouter
   .get('/projects/', function(req, res) {
-    Project.find({}, function(err, data, next) {
-      if (err) next(err);
-      res.json(data);
-    });
+    if (req.session.user.role) {
+        Project.find({}, function(err, data, next) {
+          if (err) next(err);
+          res.json(data);
+        });
+    }
+    else {
+        Project.find({'usersOnProject' : req.session.user._id},
+         function(err,data,next) {
+          if (err) next(err);
+          //console.log(pera);
+          res.json(data);
+        })
+    }
   })
   .get('/projects/:id', function(req, res) {
     var populateQuery = [{

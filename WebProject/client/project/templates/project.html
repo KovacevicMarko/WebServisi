@@ -46,7 +46,7 @@
     <br/>
     <br/>
     
-    <form ng-submit="setUsersOnProject()">
+    <form ng-if="user.role==true" ng-submit="setUsersOnProject()">
         <div class="form-group" data-ng-init="getAllUsers()">
             <h4>Choose team: </h4>
             <multiselect ng-model="team" options="u.username for u in allUsers" multiple="true"></multiselect>

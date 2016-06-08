@@ -3,13 +3,13 @@
 	
 	app.controller(
          
-    'AuthController',function($scope, $state, AuthService) {
+    'AuthController',function($scope,$rootScope, $state, AuthService) {
         
 		var onSuccess = function(response){	  
 			console.log(response.data);
 			if(response.data.success==true){
 				
-				$scope.user = response.data.user;
+				$rootScope.user = response.data.user;
 				if ($state.current.name == "login") {
 					$state.go('main');
 				}

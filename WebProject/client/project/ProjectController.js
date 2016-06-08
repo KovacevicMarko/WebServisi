@@ -1,11 +1,11 @@
 (function(){
     var app = angular.module("MyApp");
     
-    var ProjectController = function ($scope, $rootScope, ProjectService, UserService,$window, $http,$stateParams) {
+    var ProjectController = function ($scope, ProjectService, UserService,$window, $http,$stateParams) {
         
         //Vraca projekat za dati id
         
-        var id = $stateParams.projectId;
+        var projectId = $stateParams.projectId;
         
         var onSuccess = function(response){	  
             $scope.project = response.data;
@@ -18,7 +18,7 @@
         }
         
         $scope.getProject = function () {
-              ProjectService.getProject(onSuccess,onError,id);
+              ProjectService.getProject(onSuccess,onError,projectId);
                
         }
         
@@ -26,7 +26,6 @@
         
         var onSuccess2 = function(response){	  
             $scope.allUsers = response.data;
-            $scope.settings = {displayProp: 'username'};
 	    };
 		
         var onError2 = function(response){
@@ -53,7 +52,7 @@
         
         $scope.setUsersOnProject = function () {
             var teamIDs = $scope.team.map(function(user) { return user._id;});
-            ProjectService.setUsersOnProject(onSuccess3,onError3,id, teamIDs);
+            ProjectService.setUsersOnProject(onSuccess3,onError3,projectId, teamIDs);
                 
                         
         }
