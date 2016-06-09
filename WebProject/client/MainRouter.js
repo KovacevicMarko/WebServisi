@@ -70,6 +70,19 @@
             }  
         }
             
-        );
+        )
+        .state('reports', {
+            url: '/reports',
+            views: {
+                header:{
+                    templateUrl: 'auth/templates/headerL.html',
+                    controller: 'AuthController'
+                },
+                content: {
+                    templateUrl: 'report/reports.html',
+                    controller: 'ReportController'
+                }
+            }  
+        });
     });
 }())

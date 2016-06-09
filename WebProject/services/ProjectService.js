@@ -12,13 +12,13 @@ var ProjectRouter = express.Router();
 ProjectRouter
   .get('/projects/', function(req, res) {
     if (req.session.user.role) {
-        Project.find({}, function(err, data, next) {
+        Project.find({}).populate('usersOnProject').populate('tasks').exec( function(err, data, next) {
           if (err) next(err);
           res.json(data);
         });
     }
     else {
-        Project.find({'usersOnProject' : req.session.user._id},
+        Project.find({'usersOnProject' : req.session.user._id}).populate('usersOnProject').exec(
          function(err,data,next) {
           if (err) next(err);
           //console.log(pera);

@@ -1,0 +1,26 @@
+<div ng-init="getProjects()">
+    <h1>Reports</h1>
+     <div class="form-group">
+        <label for="chooseProject">Choose project:</label>
+        <select ng-change="setProject()" id="chooseProject" ng-options="p.title for p in projects track by p.title" ng-model="curProject">
+            <option></option>    
+        </select>    
+    </div>
+    
+    <div  ng-if="curProject != null">
+        <div class="col-md-6">
+            <h4>Percentage of assigned tasks per user</h4>
+            <canvas id="pie" class="chart chart-pie" chart-data="data1" chart-labels="labels1">
+            </canvas>
+        </div>
+        
+        <div class="col-md-4">
+            <h4>Percentage of completed tasks per user</h4>
+            <canvas id="bar" class="chart chart-bar" chart-data="data2" chart-labels="labels2" chart-options="options2">
+            </canvas>
+        </div>
+           
+    </div>
+        
+    
+</div>

@@ -1,7 +1,7 @@
 (function() {
 	
 			
-    var app = angular.module("MyApp",["ui.router", "ui.multiselect"]);
+    var app = angular.module("MyApp",["ui.router", "ui.multiselect","chart.js"]);
          
     var MainController = function($scope, $rootScope, $http, AuthService, $location,$state) {
         
