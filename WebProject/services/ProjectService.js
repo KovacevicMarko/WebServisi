@@ -52,13 +52,19 @@ ProjectRouter
       res.json(data);
     });
   })
-  .get('/projectsForUser/:userID', function (req,res) {
+  .get('/projectsForUser/:userID', function (req,res,next) {
     //todo: staviti req.session.user._id umesto parametra
-    Project.find({'usersOnProject' : req.params.userID}, function(err,data,next) {
+    Project.find({'usersOnProject' : req.params.userID}, function(err,data) {
       if (err) next(err);
       //console.log(pera);
       res.json(data);
     })
+  })
+  .get("/getProjectForTask/:taskID", function(req,res,next) {
+    Project.findOne({'tasks' : req.params.taskID}, function(err,data) {
+    if (err) next(err);
+    res.json(data);
+    }) 
   })
   .post('/addProject', function(req, res, next) {
     var project = new Project(req.body);

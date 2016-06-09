@@ -2,7 +2,7 @@
     var app = angular.module("MyApp");
     
     var DashboardController = function ($scope,$rootScope, ProjectService,TaskService ,$http,$window) {
-        
+         $scope.projectIds = [];
         // getTasks method
          var onSuccess1 = function(response){	  
          $scope.tasks = response.data;
@@ -24,7 +24,8 @@
          var onSuccess2 = function(response){
            //$scope.getProjects();
             //alert('Uspesno dodat projekat');
-            $window.location.reload();
+            //$window.location.reload();
+            $scope.projectIds.push(response.data._id);
 	      	};
 		
 	      	var onError2 = function(response){
@@ -32,30 +33,37 @@
 	    		//alertifyy.error("ERROR");
 		      }
           
-          $scope.addProject = function () {
-              ProjectService.addProject(
+          $scope.getProjectForTask = function (taskId) {
+              ProjectService.getProjectForTask(
                 onSuccess2,
                 onError2,
-                {
-                  title : $scope.title,
-                  code : $scope.code,
-                  description : $scope.description,
-                  deadline : $scope.deadline
-                }
+                taskId
                 );    
           };
         
         
-        //end with addProject method
-        
-        $scope.clearInputs = function () {
-            delete $scope.code;
-            delete $scope.title;
-            delete $scope.description;
-            delete $scope.deadline;    
+        $scope.filter = function (task) {
+            var filter = $scope.taskFilter;
+            if (filter == null) {
+                return true;
+            }
+            return (
+            filter.priority == null ||
+            filter.priority.length == 0 || 
+            filter.priority.
+            map(function(p) { return p.value;}).
+                indexOf(task.priority.value) != -1)
+            &&
+               (
+            filter.status == null ||
+            filter.status.length == 0 || 
+            filter.status.
+            map(function(s) { return s.value;}).
+                indexOf(task.status.value) != -1);
         }
+       
     };
 
     app.controller("DashboardController", DashboardController);
     
-    }());
+}());

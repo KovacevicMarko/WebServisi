@@ -1,6 +1,6 @@
 <div style="margin:auto;" data-ng-init="getTask()">
 	
-    <div class="col-md-4">
+    <div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title"><strong>{{task.title}}</strong></h3>
@@ -26,11 +26,11 @@
 					</div>					
 					<div class="form-group" ng-init="getProject()">
 						<label for="status">Status</label>
-						<select ng-options="value.name for (key,value) in STATUS track by value.value" ng-model="taskChange.status" class="form-control" id="status"></select>
+						<select ng-options="s.name for s in STATUS track by s.value" ng-model="taskChange.status" class="form-control" id="status"></select>
 					</div>
                     <div class="form-group">
 						<label for="priority">Priority</label>
-						<select ng-options="value.name for (key,value) in PRIORITY track by value.value" ng-model="taskChange.priority" class="form-control" id="priority"></select>
+						<select ng-options="p.name for p in PRIORITY track by p.value" ng-model="taskChange.priority" class="form-control" id="priority"></select>
 					</div>
 					<div class="form-group">
 						<label for="deadLine">Deadline</label>
@@ -43,82 +43,118 @@
   			</div>
 		</div>
 	</div>
-    <div ng-controller="CommentController">
 	
-	<!-- Komentari -->
-	<div class="container" >
-		<div class="row">
-			<div class="col-sm-12">
-				<h3>Comments</h3>
+    <div style="display:inline-block;width:25%" ng-controller="CommentController">
+	
+		<!-- Komentari -->
+		<div class="container" >
+			<div class="row">
+				
+					<h3>Comments</h3>
+				
+				<!-- /col-sm-12 -->
 			</div>
-			<!-- /col-sm-12 -->
-		</div>
-		<!-- /row -->
-		<div class="row" ng-repeat="comment in task.comments">
-			<div class="col-sm-1">
-				<div class="thumbnail">
-					<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+			<!-- /row -->
+			<div class="row" ng-repeat="comment in task.comments">
+				<div class="col-sm-1">
+					<div class="thumbnail">
+						<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+					</div>
+					<!-- /thumbnail -->
 				</div>
-				<!-- /thumbnail -->
-			</div>
-				<!-- /col-sm-1 -->
-			<div class="col-sm-5">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<strong>{{comment.creator.username}}</strong>
-						<span class="text-muted">commented at {{comment.updatedAt}}</span>
-						<span class="pull-right">
-							<span ng-if="!comment.editMode && (comment.creator._id == user._id || user.role)">
-								<button ng-click="enableEditMode(comment)" class="btn btn-warning btn-xs">Edit</button>
-								<button ng-click="deleteComment(comment._id)" class="btn btn-danger btn-xs">Delete</button>
+					<!-- /col-sm-1 -->
+				<div class="col-sm-5">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>{{comment.creator.username}}</strong>
+							<span class="text-muted">commented at {{comment.updatedAt}}</span>
+							<span class="pull-right">
+								<span ng-if="!comment.editMode && (comment.creator._id == user._id || user.role)">
+									<button ng-click="enableEditMode(comment)" class="btn btn-warning btn-xs">Edit</button>
+									<button ng-click="deleteComment(comment._id)" class="btn btn-danger btn-xs">Delete</button>
+								</span>
+								
+								<span ng-if="comment.editMode">
+									<button ng-click="changeComment(comment,commentChange.text)" class="btn btn-success btn-xs">Save</button>
+									<button ng-click="disableEditMode(comment)" class="btn btn-danger btn-xs">Cancel</button>
+								</span>
 							</span>
-							
-							<span ng-if="comment.editMode">
-								<button ng-click="changeComment(comment,commentChange.text)" class="btn btn-success btn-xs">Save</button>
-								<button ng-click="disableEditMode(comment)" class="btn btn-danger btn-xs">Cancel</button>
-							</span>
-						</span>
+						</div>
+						<div class="panel-body">
+							<span ng-if="!comment.editMode">{{comment.text}}</span>
+							<span ng-if="comment.editMode"><textarea style="resize:vertical;" rows="5" ng-model="commentChange.text"  class="form-control" id="text" placeholder="Text"></textarea></span>
+						</div>
+						<!-- /panel-body -->
 					</div>
-					<div class="panel-body">
-						<span ng-if="!comment.editMode">{{comment.text}}</span>
-						<span ng-if="comment.editMode"><textarea style="resize:vertical;" rows="5" ng-model="commentChange.text"  class="form-control" id="text" placeholder="Text"></textarea></span>
-					</div>
-					<!-- /panel-body -->
+					<!-- /panel panel-default -->
 				</div>
-				<!-- /panel panel-default -->
+				<!-- /col-sm-5 -->
+				
 			</div>
-			<!-- /col-sm-5 -->
-			
-		</div>
-		<!-- /row -->
-	</div>
-        <!-- /container -->
-	<br/>
-	<br/>
-	<br/>
-	<!-- New comment -->
-	<div class="col-md-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><strong>Add new comment</strong></h3>
-			</div>
-			
-			<div class="panel-body">
-				<form ng-submit="addComment()" role="form">
- 				     <div class="form-group">
-						<label for="text">Text</label>
-						<textarea style="resize:vertical;" rows="5" ng-model="newComment"  class="form-control" id="text" placeholder="Text"></textarea>
+			<!-- /row -->
+			<br/>
+			<br/>
+			<br/>
+			<!-- New comment -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>Add new comment</strong></h3>
+						</div>
+						
+						<div class="panel-body">
+							<form ng-submit="addComment()" role="form">
+								<div class="form-group">
+									<label for="text">Text</label>
+									<textarea style="resize:vertical;" rows="5" ng-model="newComment"  class="form-control" id="text" placeholder="Text"></textarea>
+								</div>
+								<p align="center">
+									<button type="submit" class="btn btn-sm btn-default">Add comment</button>
+								</p>
+							</form>
+						</div>
 					</div>
-					<p align="center">
-						<button type="submit" class="btn btn-sm btn-default">Add comment</button>
-					</p>
-				</form>
-  			</div>
+				</div>
+			</div>
 		</div>
-	</div>
+			<!-- /container -->
+		
+		
 	</div>
 	
-	
+	<div>
+		<h3>Task History</h3>
+		{{task.taskUpdateHistory.taskChanges}}
+        <table class="table table-striped">
+                
+            <thead>
+            <tr>
+                  
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assigned to</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+				<th>Date of update</th>
+            </tr>
+            </thead>
+            
+            <tbody>
+            <tr ng-repeat="taskUpdate in task.taskUpdateHistory | orderBy: 'dateOfChange'">
+                
+                <td>{{taskUpdate.taskChanges.title}}</td>
+                <td>{{taskUpdate.taskChanges.description}}</td>
+                <td>{{taskUpdate.taskChanges.assigned_to.username}}</td>
+                <td>{{taskUpdate.taskChanges.status.name}}</td>
+                <td>{{taskUpdate.taskChanges.priority.name}}</td>
+                <td>{{taskUpdate.taskChanges.deadline}}</td>
+				<td>{{taskUpdate.dateOfChange}}</td>
+            </tr>  
+            </tbody>
+        </table>
+	</div>
 	
 	
 </div>

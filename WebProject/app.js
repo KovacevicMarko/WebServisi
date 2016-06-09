@@ -11,21 +11,20 @@ var port = process.env.PORT || 8080; // na kom portu slusa server
 
 // ENUMERACIJE
 // STATUSI
-STATUS = {
-  TODO : {name: "To Do", value: 0},
-  INPROGRESS : {name: "In Progress",value : 1 },
-  VERIFY : {name : "Verify",value : 2 },
-  DONE : {name : "Done", value : 3 }
-}
+STATUS = [{name: "To Do", value: 0},
+ {name: "In Progress",value : 1 },
+{name : "Verify",value : 2 },
+ {name : "Done", value : 3 }
+]
 
 // PRIORITETI
-PRIORITY = {
-  TRIVIAL : {name: "Trivial", value : 0},
-  MINOR: {name: "Minor",value : 1},
-  MAJOR: {name: "Major",value : 2},
-  CRITICAL: {name: "Critical",value : 3},
-  BLOCKER: {name: "Blocker",value : 4 },
-}
+PRIORITY = [
+  {name: "Trivial", value : 0},
+  {name: "Minor",value : 1},
+  {name: "Major",value : 2},
+  {name: "Critical",value : 3},
+  {name: "Blocker",value : 4 },
+]
 //-------------------------
 
 app.get('/status',function(req,res) {

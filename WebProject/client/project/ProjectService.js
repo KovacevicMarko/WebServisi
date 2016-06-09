@@ -20,7 +20,8 @@ angular.module('MyApp')
             var req = {
                 method : 'POST',
                 url: '/ProjectService/addProject',
-                data : data
+                data : data,
+                headers : {'Content-Type': "application/json"}
             }
             
          $http(req).then(onSuccess, onError);
@@ -38,11 +39,27 @@ angular.module('MyApp')
 		$http(req).then(onSuccess, onError);
 		
 		},
+        
+        getProjectForTask: function(onSuccess, onError,taskID){
+		
+		var req = {
+                method : "GET",
+                url: "/ProjectService/getProjectForTask/"+taskID,
+                headers: {
+                     'Content-Type': "application/json"
+                         }
+            }	
+
+		$http(req).then(onSuccess, onError);
+		
+		},
+        
 		setUsersOnProject: function (onSuccess,onError,projectId,data) {
             var req = {
                 method : "POST",
                 url : '/ProjectService/setUsersOnProject/'+projectId,
-                data : data
+                data : data,
+                headers : {'Content-Type': "application/json"}
             }
             
            $http(req).then(onSuccess,onError);

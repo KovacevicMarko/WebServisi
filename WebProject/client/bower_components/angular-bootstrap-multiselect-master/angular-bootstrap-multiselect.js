@@ -42,7 +42,7 @@ angular.module("ui.multiselect", ["multiselect.tpl.html"])
 				var changeHandler = attrs.change || angular.noop;
 
 				scope.items = [];
-				scope.header = "Select users";
+				scope.header = "Select";
 				scope.multiple = isMultiple;
 				scope.disabled = false;
 
@@ -132,7 +132,7 @@ angular.module("ui.multiselect", ["multiselect.tpl.html"])
 
 				function getHeaderText() {
 					if(isEmpty(modelCtrl.$modelValue)) {
-						scope.header = attrs.msHeader || "Select users";
+						scope.header = attrs.msHeader || "Select";
 						return scope.header;
 					}
 
@@ -141,7 +141,7 @@ angular.module("ui.multiselect", ["multiselect.tpl.html"])
 							scope.header = $interpolate(attrs.msSelected)(scope);
 						} else {
 							var t = modelCtrl.$modelValue.length;
-							scope.header = t + " " + (t == 1 ? "user" : "users") + " selected";
+							scope.header = t + " selected";
 						}
 
 					} else {

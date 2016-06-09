@@ -9,15 +9,15 @@ var Project = require(__dirname+'/../model/Project'); // get the mongoose model
 var User = require(__dirname+'/../model/User'); // get the mongoose model
 
 var TaskRouter = express.Router();
-
-TaskRouter
-  .get('/tasks/:taskID', function(req,res,next){
-    var populateQuery = {
+ var populateQuery = {
       path: "comments",
       model: "Comment",
       populate : 
           { path: "creator", model:"User"}
     };
+TaskRouter
+  .get('/tasks/:taskID', function(req,res,next){
+   
     
     Task.findOne({"_id" : req.params.taskID}, function (err) {
       if (err) next(err);
@@ -75,7 +75,7 @@ TaskRouter
     var changes = req.body;
     var taskID = req.params.taskId;
     
-    Task.findOne({"_id" : taskID}).populate('creator').exec(function (err, data) {
+    Task.findOne({"_id" : taskID}).populate('creator').populate(populateQuery).exec(function (err, data) {
       if (err) next(err);
       var task = data;
       
@@ -110,7 +110,13 @@ TaskRouter
     taskV1.status = task.status;
     taskV1.priority = task.priority;
     taskV1.deadline = task.deadline;
-    taskV1.assigned_to = task.assigned_to;
+    //taskV1.assigned_to = task.assigned_to;
+    
+    User.findOne({"_id" : task.assigned_to}, function (err, data) {
+      if (err) console.log(err);
+      taskV1.assigned_to = data;
+    });
+    
     
     var taskUpdate = { "taskChanges": taskV1, "dateOfChange" : new Date()};
     task.taskUpdateHistory.push(taskUpdate); //prva verzija za cuvanje.

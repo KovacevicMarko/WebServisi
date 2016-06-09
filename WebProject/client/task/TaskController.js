@@ -112,6 +112,9 @@
                                 else if ($scope.taskChange[prop_i] == null || $scope.task[prop_j] == null) {
                                     changes = true;
                                 }
+                                else if ( typeof $scope.task[prop_j] === 'string') {
+                                    changes = !($scope.taskChange[prop_i]._id == $scope.task[prop_j]); 
+                                }
                                 else if ($scope.taskChange[prop_i].username != $scope.task[prop_j].username) {
                                     changes = true;
                                 } 

@@ -6,11 +6,11 @@
         //Vraca projekat za dati id
         
         var projectId = $stateParams.projectId;
+        $scope.team = {};
         
         var onSuccess = function(response){	  
             $scope.project = response.data;
-            $scope.team = {};
-            $scope.team = {team : $scope.project.usersOnProject};
+            $scope.team.team = $scope.project.usersOnProject;
 	    };
 		
         var onError = function(response){
@@ -43,6 +43,7 @@
             $scope.team.team = response.data.usersOnProject;
             //$scope.project.usersOnProject = $scope.team;
             alert("Successfully set team");
+            $window.location.reload();
         }
         
         var onError3 = function(response){
@@ -52,7 +53,7 @@
         
         
         $scope.setUsersOnProject = function () {
-            console.log($scope.team.team);
+            console.log($scope.team);
             var teamIDs = $scope.team.team.map(function(user) { return user._id;});
             ProjectService.setUsersOnProject(onSuccess3,onError3,projectId, teamIDs);
                 

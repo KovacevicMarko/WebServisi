@@ -2,18 +2,15 @@
     
     <!-- Selecti -->
     <div class="col-md-2">
-        <form ng-submit="filterTasks()" role="form">
             <div class="form-group">
-                    <label for="status">Priority from</label>
-                    <select ng-options="value.name for (key,value) in PRIORITY track by value.value" ng-model="taskFilter.priority1" class="form-control" id="priority1"></select>
+                    <label for="priority">Priority filter</label>
+                    <multiselect data-compare-by="value" ng-model="taskFilter.priority" options="p.name for p in PRIORITY" data-multiple="true"></multiselect>
+                    
             </div>
             <div class="form-group">
-                    <label for="priority">Priority to</label>
-                    <select ng-options="value.name for (key,value) in PRIORITY track by value.value" ng-model="taskFilter.priority2" class="form-control" id="priority2"></select>
+                    <label for="priority">Status filter</label>
+                    <multiselect data-compare-by="value" ng-model="taskFilter.status" options="s.name for s in STATUS" data-multiple="true"></multiselect>
             </div>
-            <p>
-                <button type="submit" class="btn btn-sm btn-info">Filter</button>
-            </p>
         </form>
     </div>
     <!-- Tabela taskova --> 
@@ -33,13 +30,14 @@
 			</tr>
          </thead>
          <tbody>
-             <tr ng-repeat="task in tasks">
-                 <td><a href="">{{ task.code }}</a></td>
+             <tr ng-repeat="task in tasks | orderBy : '-priority.value'" 
+             ng-show="filter(task)">
+                 <td><a ng-init="getProjectForTask(task._id)" ui-sref="task({projectId:projectIds[$index],taskId: task._id})">{{ task.code }}</a></td>
                  <td>{{ task.title }}</td>
                  <td>{{ task.description }}</td>
                  <td>{{ task.status.name}}</td>
                  <td>{{ task.priority.name}}</td>
-                 <td>{{task.assigned_to.username}}</td>
+                 <td>{{ task.assigned_to.username}}</td>
                  <td>{{ task.creator.username}}</td>
                  <td>{{ task.createdAt}}</td>
                  <td>{{ task.deadline}}</td>

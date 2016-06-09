@@ -6,7 +6,6 @@ var taskSchema = new Schema({
   code: {
     type : String,
     required : true,
-    unique : true
   },
   title: {
     type: String,
@@ -54,6 +53,7 @@ taskSchema.pre('save', function(next) {
   // ako nije postavljena vrednost za createdAt, postavimo je
   if (!this.createdAt){
     this.createdAt = currentDate;
+    //this.taskUpdateHistory[0].dateOfChange = currentDate;
     }
   // predjemo na sledecu funckiju u lancu
   next();
