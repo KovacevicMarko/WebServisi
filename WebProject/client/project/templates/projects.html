@@ -13,10 +13,10 @@
                  <td><a href="#/projects/{{project._id}}">{{ project.code }}</a></td>
                  <td>{{ project.title }}</td>
                  <td>{{ project.description }}</td>
-                 <td>{{ project.deadline }}</td>
+                 <td><span ng-bind="project.deadline | date:'dd/MM/yyyy HH:mm:ss'"></span></td>
              </tr>
          </tbody>
     </table>    
 </div>
 
-<div ng-controller="AuthController" ng-include="'project/templates/addProject.html'" ng-show="user.role"></div>
+<div ng-include="'project/templates/addProject.html'" ng-show="user.role"></div>

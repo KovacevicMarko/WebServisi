@@ -8,7 +8,7 @@
         url: '/main',
         views: {
             header:{
-                templateUrl: 'auth/templates/headerL.html',
+                templateUrl: 'header/headerL.html',
                 controller: 'AuthController'
             },
             content: {
@@ -21,7 +21,7 @@
         url: '/login',
         views: {
             header:{
-                templateUrl: 'auth/templates/headerNL.html',
+                templateUrl: 'header/headerNL.html',
                 controller: 'AuthController'
             },
             content: {
@@ -34,7 +34,7 @@
         url: '/projects',
         views: {
             header:{
-                templateUrl: 'auth/templates/headerL.html',
+                templateUrl: 'header/headerL.html',
                 controller: 'AuthController'
             },
             content: {
@@ -47,7 +47,7 @@
         url: '/projects/:projectId',
         views: {
             header:{
-                templateUrl: 'auth/templates/headerL.html',
+                templateUrl: 'header/headerL.html',
                 controller: 'AuthController'
             },
             content: {
@@ -60,7 +60,7 @@
             url: '/projects/:projectId/tasks/:taskId',
             views: {
                 header:{
-                    templateUrl: 'auth/templates/headerL.html',
+                    templateUrl: 'header/headerL.html',
                     controller: 'AuthController'
                 },
                 content: {
@@ -75,7 +75,7 @@
             url: '/reports',
             views: {
                 header:{
-                    templateUrl: 'auth/templates/headerL.html',
+                    templateUrl: 'header/headerL.html',
                     controller: 'AuthController'
                 },
                 content: {

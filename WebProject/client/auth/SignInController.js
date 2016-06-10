@@ -11,7 +11,10 @@
 				$scope.user = response.data.user;
 				$state.go('main');
 			}else{
-				//alertify.error("ERROR");
+				delete $scope.username;
+				delete $scope.password;
+				alert(response.data.msg);
+				
 			}
 
 		};

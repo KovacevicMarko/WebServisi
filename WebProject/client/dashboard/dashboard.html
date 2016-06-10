@@ -39,8 +39,8 @@
                  <td>{{ task.priority.name}}</td>
                  <td>{{ task.assigned_to.username}}</td>
                  <td>{{ task.creator.username}}</td>
-                 <td>{{ task.createdAt}}</td>
-                 <td>{{ task.deadline}}</td>
+                 <td><span ng-bind="task.createdAt | date:'dd/MM/yyyy HH:mm:ss'"></span></td>
+                 <td><span ng-bind="task.deadline | date:'dd/MM/yyyy'"></span></td>
              </tr>
          </tbody>
     </table>    

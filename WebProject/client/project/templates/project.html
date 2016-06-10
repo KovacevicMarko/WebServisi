@@ -2,11 +2,9 @@
     <h1>{{project.title}}</h1>
     <p><b>Code</b> : {{project.code}}</p>
     <p><b>Description</b> : {{project.description}}</p>
-    <p><b>Deadline</b> : {{project.deadline}}</p>
+    <p><b>Deadline</b> : <span ng-bind="project.deadline | date:'dd/MM/yyyy'"></span></p>
     <p><b>Creator</b> : {{project.creator.username}}</p>
     <br/>
-    <br/>
-
     <div>
         <h3>Tasks</h3> 
         <table class="table table-striped">
@@ -34,8 +32,8 @@
                 <td>{{task.assigned_to.username}}</td>
                 <td>{{task.status.name}}</td>
                 <td>{{task.priority.name}}</td>
-                <td>{{task.createdAt}}</td>
-                <td>{{task.deadline}}</td>
+                <td><span ng-bind="task.createdAt | date:'dd/MM/yyyy HH:mm:ss'"></span></td>
+                <td><span ng-bind="task.deadline | date:'dd/MM/yyyy'"></span></td>
             </tr>  
             </tbody>
         </table>
@@ -45,6 +43,12 @@
     <div ng-include="'task/templates/addTask.html'"></div>
     <br/>
     <br/>
+    <div>
+        <h4>Current team: </h4>
+        <ul>
+            <li ng-repeat="u in team.team">{{u.username}}</li>
+        </ul>
+    </div>
     <div ng-show="user.role==true">
         <form ng-submit="setUsersOnProject()">
             <div class="form-group" data-ng-init="getAllUsers()">

@@ -82,7 +82,27 @@ ProjectRouter
       if(err) next(err);
       var project = data;
       project.usersOnProject = req.body;
-      project.save(function (err2) {
+      project.populate('tasks',function(err) {
+        if (err) console.log(err);
+        for (var i = 0; i < project.tasks.length; i++) {
+          if (project.usersOnProject.indexOf(project.tasks[i].assigned_to) == -1) {
+            project.tasks[i].assigned_to = null;
+            
+            // promena taska - verzije
+            var taskChanges = {};
+            taskChanges.assigned_to = null;
+            taskChanges.title = project.tasks[i].title;
+            taskChanges.description = project.tasks[i].description;
+            taskChanges.status = project.tasks[i].status;
+            taskChanges.priority = project.tasks[i].priority;
+            taskChanges.deadline = project.tasks[i].deadline;
+            
+            project.tasks[i].taskUpdateHistory.push({dateOfChange : new Date(), taskChanges:taskChanges });
+            project.tasks[i].save();
+          }
+        }
+        
+        project.save(function (err2) {
         if (err2) next(err2);
         project.populate('usersOnProject',function (err3) {
           if (err3) next(err3);
@@ -90,6 +110,8 @@ ProjectRouter
         });
         
       });
+      })
+      
     });
   })
   .delete('/project/:id', function(req, res, next) {

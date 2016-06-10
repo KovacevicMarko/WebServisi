@@ -141,12 +141,7 @@ TaskRouter
         });
         
       });
-  })
-  .delete('/task/:taskID',function(req,res,next) {
-    Task.remove({"_id" : req.params.taskID}, function (err,data) {
-      if (err) next(err);
-      res.json({success:true});
-    })
   });
+  
   
   module.exports = TaskRouter;

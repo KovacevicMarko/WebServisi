@@ -1,5 +1,5 @@
-<div style="margin:auto;" data-ng-init="getTask()">
-	
+<div class="container" data-ng-init="getTask()">
+	<div class="row">
     <div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -8,7 +8,8 @@
 			
 			<div class="panel-body">
 				<p><b>Code</b> : {{task.code}}</p>
-				<p><b>Created at</b> : {{task.createdAt}}</p>
+				
+				<p><b>Created at</b> : <span ng-bind="task.createdAt | date:'dd/MM/yyyy HH:mm:ss'"></span></p>
 				<p><b>Creator</b> : {{task.creator.username}}</p>
 				
 				<form ng-submit="changeTask()" role="form">
@@ -44,7 +45,7 @@
 		</div>
 	</div>
 	
-    <div style="display:inline-block;width:25%" ng-controller="CommentController">
+    <div style="display:inline-block;width:25% ; float:right;" ng-controller="CommentController">
 	
 		<!-- Komentari -->
 		<div class="container" >
@@ -67,7 +68,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<strong>{{comment.creator.username}}</strong>
-							<span class="text-muted">commented at {{comment.updatedAt}}</span>
+							<span class="text-muted">commented at <span ng-bind="comment.updatedAt | date:'dd/MM/yyyy HH:mm:ss'"></span></span>
 							<span class="pull-right">
 								<span ng-if="!comment.editMode && (comment.creator._id == user._id || user.role)">
 									<button ng-click="enableEditMode(comment)" class="btn btn-warning btn-xs">Edit</button>
@@ -122,38 +123,42 @@
 		
 		
 	</div>
-	
-	<div>
-		<h3>Task History</h3>
-		{{task.taskUpdateHistory.taskChanges}}
-        <table class="table table-striped">
-                
-            <thead>
-            <tr>
-                  
-                <th>Title</th>
-                <th>Description</th>
-                <th>Assigned to</th>
-                <th>Status</th>
-                <th>Priority</th>
-                <th>Deadline</th>
-				<th>Date of update</th>
-            </tr>
-            </thead>
-            
-            <tbody>
-            <tr ng-repeat="taskUpdate in task.taskUpdateHistory | orderBy: 'dateOfChange'">
-                
-                <td>{{taskUpdate.taskChanges.title}}</td>
-                <td>{{taskUpdate.taskChanges.description}}</td>
-                <td>{{taskUpdate.taskChanges.assigned_to.username}}</td>
-                <td>{{taskUpdate.taskChanges.status.name}}</td>
-                <td>{{taskUpdate.taskChanges.priority.name}}</td>
-                <td>{{taskUpdate.taskChanges.deadline}}</td>
-				<td>{{taskUpdate.dateOfChange}}</td>
-            </tr>  
-            </tbody>
-        </table>
+	</div>
+	<div class="row">
+		
+			<div>
+				<h3>Task History</h3>
+			</div>
+			<div>
+				<table class="table table-striped">
+						
+					<thead>
+					<tr>
+						
+						<th>Title</th>
+						<th>Description</th>
+						<th>Assigned to</th>
+						<th>Status</th>
+						<th>Priority</th>
+						<th>Deadline</th>
+						<th>Date of update</th>
+					</tr>
+					</thead>
+					
+					<tbody>
+					<tr ng-repeat="taskUpdate in task.taskUpdateHistory | orderBy: 'dateOfChange'">
+						
+						<td>{{taskUpdate.taskChanges.title}}</td>
+						<td>{{taskUpdate.taskChanges.description}}</td>
+						<td>{{taskUpdate.taskChanges.assigned_to.username}}</td>
+						<td>{{taskUpdate.taskChanges.status.name}}</td>
+						<td>{{taskUpdate.taskChanges.priority.name}}</td>
+						<td><p ng-bind="taskUpdate.taskChanges.deadline | date:'dd/MM/yyyy'"></p></td>
+						<td><p ng-bind="taskUpdate.dateOfChange | date:'dd/MM/yyyy HH:mm:ss'"></p></td>
+					</tr>  
+					</tbody>
+				</table>
+			</div>
 	</div>
 	
 	

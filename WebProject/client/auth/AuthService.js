@@ -28,11 +28,6 @@ angular.module('MyApp')
 		    	password: password
 		    }
 		}
-		// ODE MI 5 SATI NA OVO
-		// UVEK PRAZAN BODY KAD JE SLAO ZAHTEV
-		// MORA DA SE STAVI '$.param({foo:bar, ...})' za 'data'
-		// http://stackoverflow.com/questions/19254029/angularjs-http-post-does-not-send-data
-		
 		$http(req).then(onSuccess, onError);
 
 		},

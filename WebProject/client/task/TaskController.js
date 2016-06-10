@@ -68,12 +68,24 @@
             if ($scope.newTask.assigned_to == undefined) {
                 $scope.newTask.assigned_to = null;
             }
+            
+            var now = new Date();
+            var deadline = new Date($scope.newTask.deadline);
+            if( deadline < now){
+                alert('Chosen deadline is in the past. Try again.');            
+            }
+            else if (deadline > new Date($scope.project.deadline)){
+                alert('Chosen deadline exceeds the deadline of project. Try again.');
+            }
+            else {
               TaskService.addTask(
               onSuccess1,
               onError1,
               $scope.newTask,
               projectId
-              );
+              );  
+            }
+              
                
         };
         
@@ -96,7 +108,16 @@
            var taskCh = $scope.taskChange;
            var changes = false;
            
-           for(var prop_i in $scope.taskChange){
+           var now = new Date();
+            var deadline = new Date(taskCh.deadline);
+            if( deadline < now){
+                alert('Chosen deadline is in the past. Try again.');            
+            }
+            else if (deadline > new Date($scope.project.deadline)){
+                alert('Chosen deadline exceeds the deadline of project. Try again.');
+            }
+           else {
+            for(var prop_i in $scope.taskChange){
                if (!changes) {
                    for(var prop_j in $scope.task){
                         if(prop_i == prop_j){
@@ -141,7 +162,9 @@
                     taskCh,
                     taskId
                     );
+           }    
            }
+           
            
         };
         
